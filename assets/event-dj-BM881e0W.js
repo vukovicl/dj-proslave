@@ -1,1 +1,0 @@
-var e=`/assets/event-dj-DxZCLyyS.webp`;export{e as t};

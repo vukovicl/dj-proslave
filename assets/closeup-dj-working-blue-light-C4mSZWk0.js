@@ -1,0 +1,1 @@
+var e=`/dj-proslave/assets/closeup-dj-working-blue-light-DMHmlcDy.webp`;export{e as t};
