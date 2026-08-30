@@ -23,7 +23,7 @@ module.exports = {
     },
     extend: {
       colors: {
-        'accent-gold': 'var(--color-accent-gold, #d4af37)',
+        'accent-gold': 'var(--color-accent-gold, #c2a75a)',
       }
     },
   },

@@ -6,16 +6,105 @@ import djProslaveImg from '../../assets/images/dj-proslave.webp';
 import eventDjImg from '../../assets/images/event-dj.webp';
 import heroImg from '../../assets/images/hero.webp';
 import djVjencanjaImg from '../../assets/images/dj-vjencanja.webp';
+import eventsVideo from '../../assets/videos/events.mp4';
+import privatePartiesVideo from '../../assets/videos/private-parties.mp4';
+import weddingsVideo from '../../assets/videos/weddings.mp4';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faChevronLeft,
   faChevronRight,
   faXmark,
   faMaximize,
-  faMinus
+  faMinus,
+  faStar
 } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router';
 import { getSeoMeta } from '../utils/seo';
+
+const reviewsData = [
+  { author: "Ana Cvitanović", text: "Na maturalnoj napravljena top atmosfera, sve naše želje ispunjene i sve ispoštovano🔝🔝", date: new Date('2026-07-15') },
+  { author: "Matija Matković", text: "Preporuka za vjenčanje! Svi zadovoljni i mladenci i djeca i bake i djedovi! Bilo je top od organizacije do realizacije!", date: new Date('2026-07-15') },
+  { author: "Ivana Kuzek Vatavuk", text: "Sve pohvale DJ-u! Odlična glazba, super atmosfera, ali i dogovor i komunikacija prije svadbe. Preporuke! ☺️", date: new Date('2026-07-15') },
+  { author: "kristina vučić", text: "Proslava mog 50-tog rođendana ne bi bila tulum stoljeca bez DJ Vrane...sve što smo dogovorili ispoštovao, mix pjesama savršen,prepoznaje kada treba mjenjati ritam tuluma, susretljiv prema željama ekipe, izuzetno profesionalan..sve u svemu za svaku preporuku 🫶", date: new Date('2026-04-15') },
+  { author: "Ivan Maravić", text: "DJ za sve prigode, uvijek transparentan, pristupačan te se drži dogovora. Sve preporuke!", date: new Date('2026-03-15') },
+  { author: "Maja Gabrek", text: "Odlican DJ, simpatičan, napravio super ugođaj i atmosferu, sve pohvale👏🏻👏🏻", date: new Date('2026-04-15') },
+  { author: "Sonja Čičak", text: "top, odlicno pustao i svima se svidjelo!!", date: new Date('2026-04-15') },
+  { author: "Mario Tica", text: "Odlican decko. Sve prema dogovoru. Za svaku preporuku.", date: new Date('2026-05-15') },
+  { author: "Ana Šarić", text: "Za svaku preporuku!!! Top!!!", date: new Date('2026-03-15') },
+  { author: "D S", text: "Najbolji DJ…sigurno se nećete požaliti ako ga bukirate..mi smo ga uzeli za vjenčanje trebao je dečko biti tu kao prateća glazba uz bend ali je totalno preuzeo show i napravio ludnicu..definitvno za svaku preporuku…i Btw dečko je super pristojan i ljubazan i dostupan u svakom trenu..", date: new Date('2026-08-09') },
+  { author: "Ana Miha", text: "Preporuka za vjencanje!", date: new Date('2026-07-15') },
+  { author: "Tara Ivišić", text: "Odličan DJ za maturalnu večer! Atmosfera je bila vrhunska od samog početka do kraja. Glazba je bila odlično odabrana, prilagođena svim generacijama i nitko nije ostao sjediti. DJ je znao podići raspoloženje, pratiti želje gostiju i …", date: new Date('2026-07-15') },
+  { author: "Lauraa", text: "Sve pohvale za izvrsnu organizaciju i atmosferu koju je DJ stvorio na 18. rođendanu. Spoj profesionalnosti i odlične zabave. Svakako bismo ga ponovno angažirali.", date: new Date('2026-03-15') }
+];
+
+const allServicesData = [
+  {
+    id: 1,
+    title: 'DJ za Proslave',
+    desc: 'Učinite svoju proslavu nezaboravnom uz naše talentirane DJ-eve, prilagođene glazbene setove i energičnu atmosferu.',
+    link: '/dj-za-proslave',
+    video: privatePartiesVideo
+  },
+  {
+    id: 2,
+    title: 'DJ za Evente',
+    desc: 'Za bitne ceremonije i događaje osiguravamo širok glazbeni spektar i atmosferu koja podiže svaki event na višu razinu.',
+    link: '/dj-za-korporativni-dogadaj',
+    video: eventsVideo
+  },
+  {
+    id: 3,
+    title: 'DJ za Svadbe',
+    desc: 'Dodajte dašak magije Vašem vjenčanju. Profesionalna glazbena kulisa za noć ispunjenu plesom i nezaboravnim trenucima.',
+    link: '/dj-za-vjencanja',
+    video: weddingsVideo
+  },
+  {
+    id: 4,
+    title: 'DJ + violina',
+    desc: 'Elegancija klasičnog instrumenta uz moderne ritmove. Savršena kombinacija za profinjenu atmosferu i doček gostiju.',
+    link: '/usluge',
+    video: weddingsVideo
+  },
+  {
+    id: 5,
+    title: 'DJ + saksofon',
+    desc: 'Dodajte live energiju saksofona. Ovaj spoj stvara vrhunski klupski ili lounge ugođaj koji će gosti obožavati.',
+    link: '/usluge',
+    video: eventsVideo
+  },
+  {
+    id: 6,
+    title: 'DJ + harmonika',
+    desc: 'Idealan odabir za zagrijavanje atmosfere na svadbama i tradicionalnim proslavama. Spoj modernog i onog domaćeg.',
+    link: '/usluge',
+    video: privatePartiesVideo
+  }
+];
+
+const getTimeAgo = (date: Date) => {
+  const now = new Date();
+  const diffInMonths = (now.getFullYear() - date.getFullYear()) * 12 + now.getMonth() - date.getMonth();
+  
+  if (diffInMonths <= 0) {
+    const diffInDays = Math.floor((now.getTime() - date.getTime()) / (1000 * 3600 * 24));
+    if (diffInDays < 7) return 'prije nekoliko dana';
+    const weeks = Math.floor(diffInDays / 7);
+    if (weeks <= 1) return 'prije tjedan dana';
+    return `prije ${weeks} tjedna`;
+  } else if (diffInMonths === 1) {
+    return 'prije mjesec dana';
+  } else if (diffInMonths < 5) {
+    return `prije ${diffInMonths} mjeseca`;
+  } else if (diffInMonths < 12) {
+    return `prije ${diffInMonths} mjeseci`;
+  } else {
+    const years = Math.floor(diffInMonths / 12);
+    if (years === 1) return 'prije godinu dana';
+    if (years < 5) return `prije ${years} godine`;
+    return `prije ${years} godina`;
+  }
+};
 
 export function meta() {
   return getSeoMeta(
@@ -49,34 +138,16 @@ function Home() {
     ]
   };
 
-  const [listOfImages] = useState([
-    {
-      name: "gallery01",
-      alt: 'Galerija 1'
-    },
-    {
-      name: "gallery02",
-      alt: 'Galerija 2'
-    },
-    {
-      name: "gallery03",
-      alt: 'Galerija 3'
-    },
-    {
-      name: "gallery04",
-      alt: 'Galerija 4'
-    },
-    {
-      name: "gallery05",
-      alt: 'Galerija 5'
-    },
-    {
-      name: "gallery06",
-      alt: 'Galerija 6'
-    }
-  ]);
+  const [displayedReviews, setDisplayedReviews] = useState<typeof reviewsData>([]);
+  const [displayedServices, setDisplayedServices] = useState<typeof allServicesData>([]);
 
-  const [hovered, setHovered] = useState('');
+  useEffect(() => {
+    const shuffledReviews = [...reviewsData].sort(() => 0.5 - Math.random());
+    setDisplayedReviews(shuffledReviews.slice(0, 3));
+    
+    const shuffledServices = [...allServicesData].sort(() => 0.5 - Math.random());
+    setDisplayedServices(shuffledServices.slice(0, 3));
+  }, []);
 
   const { scrollYProgress } = useScroll();
 
@@ -118,17 +189,17 @@ function Home() {
               transition={{ duration: 0.8, ease: "easeOut" }}
               className='text-[color:var(--color-accent-gold)] uppercase tracking-[0.15em] text-sm md:text-base font-semibold mb-4'
             >
-              GLAZBA KOJA STVARA
+              STVARAMO ATMOSFERU KOJA SE PAMTI
             </motion.p>
 
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-              className='text-5xl md:text-7xl lg:text-[5rem] font-light tracking-wide text-white leading-[1.1] mb-6 drop-shadow-xl uppercase'
+              className='text-4xl md:text-6xl lg:text-[4.5rem] font-light tracking-wide text-white leading-[1.1] mb-6 drop-shadow-xl uppercase'
             >
-              Nezaboravne<br />
-              <span className='font-semibold text-[color:var(--color-accent-gold)]'>Trenutke</span>
+              DJ za proslave, evente i slavlja<br />
+              <span className='font-semibold text-[color:var(--color-accent-gold)]'>u Zagrebu</span>
             </motion.h1>
 
             <motion.p
@@ -137,7 +208,7 @@ function Home() {
               transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
               className='text-gray-300 text-lg md:text-xl font-light mb-10 max-w-md leading-relaxed drop-shadow-md'
             >
-              Premium DJ usluge za vjenčanja, privatne proslave i korporativne događaje.
+              Profesionalni DJ-evi za vjenčanja, rođendane, privatne i korporativne događaje. Vrhunska glazba, ozvučenje i rasvjeta za događaje koje ćete pamtiti.
             </motion.p>
 
             <motion.div
@@ -151,21 +222,142 @@ function Home() {
                 onClick={() => window.scrollTo(0, 0)}
                 className='px-8 h-12 md:h-14 inline-flex items-center justify-center bg-[color:var(--color-accent-gold)] text-black font-bold uppercase tracking-widest text-sm hover:bg-[#ffdf73] transition-colors shadow-[0_0_20px_rgba(212,175,55,0.3)] hover:shadow-[0_0_30px_rgba(212,175,55,0.6)] leading-none pt-1'
               >
-                Zatraži ponudu
+                Zatražite ponudu
               </Link>
               <Link
-                to='/galerija'
+                to='/o-nama'
                 onClick={() => window.scrollTo(0, 0)}
                 className='px-8 h-12 md:h-14 inline-flex items-center justify-center bg-transparent border border-white/30 text-white font-bold uppercase tracking-widest text-sm hover:bg-white/10 hover:border-white transition-colors backdrop-blur-sm leading-none pt-1'
               >
-                Pogledaj galeriju
+                Saznajte više
               </Link>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* 2. Intro Hook Section */}
+      {/* 1.5. Video Section */}
+      <section className='relative py-24 md:py-32 overflow-hidden bg-[#0a0b10] flex flex-col items-center border-t border-white/5'>
+        {/* Glow */}
+        <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[color:var(--color-accent-gold)] opacity-[0.05] blur-[120px] rounded-full z-0 pointer-events-none'></div>
+        
+        <div className='container relative z-10 flex flex-col items-center text-center'>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className='mb-12 md:mb-16'
+          >
+            <h3 className='text-3xl md:text-5xl font-light tracking-wide text-white leading-tight mb-4 drop-shadow-lg'>
+              Svaki događaj ima svoju <span className='font-semibold text-[color:var(--color-accent-gold)]'>priču</span>
+            </h3>
+            <p className='text-lg md:text-2xl text-gray-300 font-light drop-shadow-md'>
+              Mi joj dajemo ritam koji će se pamtiti
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+            className='w-full max-w-5xl rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10 relative z-20 bg-black/50'
+          >
+            <video 
+              src={eventsVideo} 
+              autoPlay 
+              loop 
+              muted 
+              playsInline 
+              className='w-full h-auto object-cover aspect-video'
+            />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+            className='mt-12 md:mt-16'
+          >
+            <Link 
+              to='/galerija' 
+              onClick={() => window.scrollTo(0, 0)} 
+              className='px-8 h-12 md:h-14 inline-flex items-center justify-center bg-[color:var(--color-accent-gold)] text-black font-bold uppercase tracking-widest text-sm hover:bg-[#ffdf73] transition-colors shadow-[0_0_20px_rgba(212,175,55,0.3)] hover:shadow-[0_0_30px_rgba(212,175,55,0.6)] leading-none pt-1 gap-4 group'
+            >
+              Pogledajte galeriju
+              <FontAwesomeIcon icon={faChevronRight} className='transition-transform duration-500 group-hover:translate-x-1.5' />
+            </Link>
+          </motion.div>
+          
+        </div>
+      </section>
+
+
+
+      {/* 3. Usluge Section (MOVED UP) */}
+      <section className='home-services-section relative py-24 md:py-40 overflow-hidden bg-[#0a0b10] border-t border-white/5'>
+        {/* Glow */}
+        <div className='absolute bottom-0 left-0 w-[600px] h-[600px] bg-[color:var(--color-accent-gold)] opacity-[0.05] blur-[150px] rounded-full z-0 pointer-events-none'></div>
+
+        <div className="container relative z-10">
+          <div className='mb-16 md:mb-24 text-center flex flex-col items-center'>
+            <h4 className='text-[color:var(--color-accent-gold)] font-medium tracking-[0.2em] uppercase text-xs md:text-sm mb-6 flex items-center gap-4 justify-center'>
+              <span className='w-12 h-px bg-[color:var(--color-accent-gold)]'></span>
+              Naše Usluge
+              <span className='w-12 h-px bg-[color:var(--color-accent-gold)]'></span>
+            </h4>
+            <h3 className='text-4xl md:text-5xl lg:text-6xl font-light tracking-wide text-white leading-tight'>
+              Što nudimo za <br className="hidden md:block" />
+              <span className='font-semibold bg-clip-text text-transparent bg-gradient-to-r from-[color:var(--color-accent-gold)] to-[#ffdf73]'>
+                vašu savršenu proslavu.
+              </span>
+            </h3>
+          </div>
+
+          <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
+            {displayedServices.map((service, index) => (
+              <motion.div
+                key={service.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 * (index + 1), ease: "easeOut" }}
+                className='group relative rounded-3xl overflow-hidden aspect-[4/5] md:aspect-auto md:h-[450px] shadow-[0_20px_40px_rgba(0,0,0,0.6)] border border-white/5 bg-[#1e1e1e] flex flex-col justify-end'
+              >
+                <div className='absolute inset-0 z-0'>
+                  <video src={service.video} autoPlay loop muted playsInline className='w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.08]' />
+                  <div className='absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10'></div>
+                </div>
+
+                <div className='relative z-20 p-8 md:p-10 translate-y-4 group-hover:translate-y-0 transition-transform duration-500'>
+                  <h3 className='text-2xl md:text-3xl font-medium text-white mb-1'>{service.title}</h3>
+                  <div className='max-h-0 opacity-0 group-hover:max-h-40 group-hover:opacity-100 group-hover:mt-3 transition-all duration-500 ease-in-out overflow-hidden'>
+                    <p className='text-gray-300 text-sm leading-relaxed mb-6'>
+                      {service.desc}
+                    </p>
+                  </div>
+                  <Link to={service.link} onClick={() => window.scrollTo(0, 0)} className='inline-flex items-center gap-3 text-[color:var(--color-accent-gold)] font-medium uppercase tracking-wider text-xs group/link mt-2'>
+                    Saznajte više
+                    <FontAwesomeIcon icon={faChevronRight} className='transition-transform duration-300 group-hover/link:translate-x-1' />
+                  </Link>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          <div className='mt-16 md:mt-24 flex justify-center'>
+            <Link to='/usluge' onClick={() => window.scrollTo(0, 0)} className='inline-flex items-center gap-4 px-8 py-4 rounded-full border border-white/20 text-white hover:bg-white hover:text-black transition-all duration-500 uppercase tracking-widest text-xs font-bold group shadow-lg'>
+              Pregledajte sve usluge
+              <FontAwesomeIcon icon={faChevronRight} className='transition-transform duration-500 group-hover:translate-x-1.5' />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 2. Intro Hook Section (Restored) */}
       <section className='home-landing-section relative overflow-hidden py-32 md:py-48'>
         <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] md:w-[800px] h-[400px] bg-[color:var(--color-accent-gold)] opacity-[0.08] blur-[120px] rounded-full z-0 pointer-events-none'></div>
 
@@ -197,176 +389,6 @@ function Home() {
         </div>
       </section>
 
-      {/* 3. Usluge Section (MOVED UP) */}
-      <section className='home-services-section relative py-24 md:py-40 overflow-hidden bg-[#0a0b10] border-t border-white/5'>
-        {/* Glow */}
-        <div className='absolute bottom-0 left-0 w-[600px] h-[600px] bg-[color:var(--color-accent-gold)] opacity-[0.05] blur-[150px] rounded-full z-0 pointer-events-none'></div>
-
-        <div className="container relative z-10">
-          <div className='mb-16 md:mb-24 text-center flex flex-col items-center'>
-            <h4 className='text-[color:var(--color-accent-gold)] font-medium tracking-[0.2em] uppercase text-xs md:text-sm mb-6 flex items-center gap-4 justify-center'>
-              <span className='w-12 h-px bg-[color:var(--color-accent-gold)]'></span>
-              Naše Usluge
-              <span className='w-12 h-px bg-[color:var(--color-accent-gold)]'></span>
-            </h4>
-            <h3 className='text-4xl md:text-5xl lg:text-6xl font-light tracking-wide text-white leading-tight'>
-              Što nudimo za <br className="hidden md:block" />
-              <span className='font-semibold bg-clip-text text-transparent bg-gradient-to-r from-[color:var(--color-accent-gold)] to-[#ffdf73]'>
-                vašu savršenu proslavu.
-              </span>
-            </h3>
-          </div>
-
-          <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
-            {/* Card 1 */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-              className='group relative rounded-3xl overflow-hidden aspect-[4/5] md:aspect-auto md:h-[450px] shadow-[0_20px_40px_rgba(0,0,0,0.6)] border border-white/5 bg-[#1e1e1e] flex flex-col justify-end'
-            >
-              <div className='absolute inset-0 z-0'>
-                <img src={djProslaveImg} alt='DJ za Proslave' className='w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.08]' />
-                <div className='absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10'></div>
-              </div>
-
-              <div className='relative z-20 p-8 md:p-10 translate-y-4 group-hover:translate-y-0 transition-transform duration-500'>
-                <h3 className='text-2xl md:text-3xl font-medium text-white mb-1'>DJ za Proslave</h3>
-                <div className='max-h-0 opacity-0 group-hover:max-h-40 group-hover:opacity-100 group-hover:mt-3 transition-all duration-500 ease-in-out overflow-hidden'>
-                  <p className='text-gray-300 text-sm leading-relaxed mb-6'>
-                    Učinite svoju proslavu nezaboravnom uz naše talentirane DJ-eve, prilagođene glazbene setove i energičnu atmosferu.
-                  </p>
-                </div>
-                <Link to='/dj-za-proslave' onClick={() => window.scrollTo(0, 0)} className='inline-flex items-center gap-3 text-[color:var(--color-accent-gold)] font-medium uppercase tracking-wider text-xs group/link mt-2'>
-                  Saznaj više
-                  <FontAwesomeIcon icon={faChevronRight} className='transition-transform duration-300 group-hover/link:translate-x-1' />
-                </Link>
-              </div>
-            </motion.div>
-
-            {/* Card 2 */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-              className='group relative rounded-3xl overflow-hidden aspect-[4/5] md:aspect-auto md:h-[450px] shadow-[0_20px_40px_rgba(0,0,0,0.6)] border border-white/5 bg-[#1e1e1e] flex flex-col justify-end'
-            >
-              <div className='absolute inset-0 z-0'>
-                <img src={eventDjImg} alt='DJ za Evente' className='w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.08]' />
-                <div className='absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10'></div>
-              </div>
-              <div className='relative z-20 p-8 md:p-10 translate-y-4 group-hover:translate-y-0 transition-transform duration-500'>
-                <h3 className='text-2xl md:text-3xl font-medium text-white mb-1'>DJ za Evente</h3>
-                <div className='max-h-0 opacity-0 group-hover:max-h-40 group-hover:opacity-100 group-hover:mt-3 transition-all duration-500 ease-in-out overflow-hidden'>
-                  <p className='text-gray-300 text-sm leading-relaxed mb-6'>
-                    Za bitne ceremonije i događaje osiguravamo širok glazbeni spektar i atmosferu koja podiže svaki event na višu razinu.
-                  </p>
-                </div>
-                <Link to='/dj-za-korporativni-dogadaj' onClick={() => window.scrollTo(0, 0)} className='inline-flex items-center gap-3 text-[color:var(--color-accent-gold)] font-medium uppercase tracking-wider text-xs group/link mt-2'>
-                  Saznaj više
-                  <FontAwesomeIcon icon={faChevronRight} className='transition-transform duration-300 group-hover/link:translate-x-1' />
-                </Link>
-              </div>
-            </motion.div>
-
-            {/* Card 3 */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-              className='group relative rounded-3xl overflow-hidden aspect-[4/5] md:aspect-auto md:h-[450px] shadow-[0_20px_40px_rgba(0,0,0,0.6)] border border-white/5 bg-[#1e1e1e] flex flex-col justify-end'
-            >
-              <div className='absolute inset-0 z-0'>
-                <img src={djVjencanjaImg} alt='DJ za Svadbe' className='w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.08]' />
-                <div className='absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10'></div>
-              </div>
-              <div className='relative z-20 p-8 md:p-10 translate-y-4 group-hover:translate-y-0 transition-transform duration-500'>
-                <h3 className='text-2xl md:text-3xl font-medium text-white mb-1'>DJ za Svadbe</h3>
-                <div className='max-h-0 opacity-0 group-hover:max-h-40 group-hover:opacity-100 group-hover:mt-3 transition-all duration-500 ease-in-out overflow-hidden'>
-                  <p className='text-gray-300 text-sm leading-relaxed mb-6'>
-                    Dodajte dašak magije Vašem vjenčanju. Profesionalna glazbena kulisa za noć ispunjenu plesom i nezaboravnim trenucima.
-                  </p>
-                </div>
-                <Link to='/dj-za-vjencanja' onClick={() => window.scrollTo(0, 0)} className='inline-flex items-center gap-3 text-[color:var(--color-accent-gold)] font-medium uppercase tracking-wider text-xs group/link mt-2'>
-                  Saznaj više
-                  <FontAwesomeIcon icon={faChevronRight} className='transition-transform duration-300 group-hover/link:translate-x-1' />
-                </Link>
-              </div>
-            </motion.div>
-          </div>
-
-          <div className='mt-16 md:mt-24 flex justify-center'>
-            <Link to='/usluge' onClick={() => window.scrollTo(0, 0)} className='inline-flex items-center gap-4 px-8 py-4 rounded-full border border-white/20 text-white hover:bg-white hover:text-black transition-all duration-500 uppercase tracking-widest text-xs font-bold group shadow-lg'>
-              Pregledaj sve usluge
-              <FontAwesomeIcon icon={faChevronRight} className='transition-transform duration-500 group-hover:translate-x-1.5' />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* 4. Marquee Section */}
-      <section className='py-20 md:py-32 relative overflow-hidden bg-[#0a0b10] border-y border-white/5'>
-        {/* Subtle background glow */}
-        <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] md:w-[1000px] h-[150px] bg-[color:var(--color-accent-gold)] opacity-[0.04] blur-[80px] rounded-full z-0 pointer-events-none'></div>
-
-        <div className='container mb-12 md:mb-20 relative z-10'>
-          <h3 className='text-2xl md:text-4xl font-light tracking-wide text-gray-400 m-0 text-center uppercase drop-shadow-md'>
-            Sviramo sve što <span className='text-white font-medium'>poželite</span>
-          </h3>
-          <div className='w-16 md:w-24 h-1 bg-gradient-to-r from-transparent via-[color:var(--color-accent-gold)] to-transparent mx-auto mt-6 rounded-full opacity-70'></div>
-        </div>
-
-        <div className='w-full overflow-hidden flex relative z-10' style={{ WebkitMaskImage: 'linear-gradient(90deg, transparent, #fff 10%, #fff 90%, transparent)' }}>
-          <motion.div
-            className='flex whitespace-nowrap'
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{ ease: "linear", repeat: Infinity, duration: 40 }}
-          >
-            {[...Array(4)].map((_, i) => (
-              <div key={i} className='flex items-center'>
-                <span className='text-5xl md:text-7xl font-black uppercase tracking-wider mx-6 md:mx-12 text-transparent' style={{ WebkitTextStroke: '1px rgba(255,255,255,0.2)' }}>EDM</span>
-                <span className='text-[color:var(--color-accent-gold)] text-2xl md:text-3xl mx-4 md:mx-6 opacity-70'>✦</span>
-                <span className='text-5xl md:text-7xl font-black uppercase tracking-wider mx-6 md:mx-12 text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]'>Narodno</span>
-                <span className='text-[color:var(--color-accent-gold)] text-2xl md:text-3xl mx-4 md:mx-6 opacity-70'>✦</span>
-                <span className='text-5xl md:text-7xl font-black uppercase tracking-wider mx-6 md:mx-12 text-transparent' style={{ WebkitTextStroke: '2px var(--color-accent-gold)' }}>Trash</span>
-                <span className='text-[color:var(--color-accent-gold)] text-2xl md:text-3xl mx-4 md:mx-6 opacity-70'>✦</span>
-                <span className='text-5xl md:text-7xl font-black uppercase tracking-wider mx-6 md:mx-12 text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]'>Strani hitovi</span>
-                <span className='text-[color:var(--color-accent-gold)] text-2xl md:text-3xl mx-4 md:mx-6 opacity-70'>✦</span>
-                <span className='text-5xl md:text-7xl font-black uppercase tracking-wider mx-6 md:mx-12 text-transparent' style={{ WebkitTextStroke: '1px rgba(255,255,255,0.2)' }}>Domaće</span>
-                <span className='text-[color:var(--color-accent-gold)] text-2xl md:text-3xl mx-4 md:mx-6 opacity-70'>✦</span>
-              </div>
-            ))}
-          </motion.div>
-        </div>
-
-        {/* Opposite direction scroll row */}
-        <div className='w-full overflow-hidden flex relative z-10 mt-6 md:mt-10' style={{ WebkitMaskImage: 'linear-gradient(90deg, transparent, #fff 10%, #fff 90%, transparent)' }}>
-          <motion.div
-            className='flex whitespace-nowrap'
-            animate={{ x: ["-50%", "0%"] }}
-            transition={{ ease: "linear", repeat: Infinity, duration: 45 }}
-          >
-            {[...Array(4)].map((_, i) => (
-              <div key={i} className='flex items-center'>
-                <span className='text-5xl md:text-7xl font-black uppercase tracking-wider mx-6 md:mx-12 text-transparent' style={{ WebkitTextStroke: '1px rgba(255,255,255,0.2)' }}>Pop</span>
-                <span className='text-[color:var(--color-accent-gold)] text-2xl md:text-3xl mx-4 md:mx-6 opacity-70'>✦</span>
-                <span className='text-5xl md:text-7xl font-black uppercase tracking-wider mx-6 md:mx-12 text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]'>Rock</span>
-                <span className='text-[color:var(--color-accent-gold)] text-2xl md:text-3xl mx-4 md:mx-6 opacity-70'>✦</span>
-                <span className='text-5xl md:text-7xl font-black uppercase tracking-wider mx-6 md:mx-12 text-transparent' style={{ WebkitTextStroke: '2px var(--color-accent-gold)' }}>RnB</span>
-                <span className='text-[color:var(--color-accent-gold)] text-2xl md:text-3xl mx-4 md:mx-6 opacity-70'>✦</span>
-                <span className='text-5xl md:text-7xl font-black uppercase tracking-wider mx-6 md:mx-12 text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]'>Balkan</span>
-                <span className='text-[color:var(--color-accent-gold)] text-2xl md:text-3xl mx-4 md:mx-6 opacity-70'>✦</span>
-                <span className='text-5xl md:text-7xl font-black uppercase tracking-wider mx-6 md:mx-12 text-transparent' style={{ WebkitTextStroke: '1px rgba(255,255,255,0.2)' }}>Latino</span>
-                <span className='text-[color:var(--color-accent-gold)] text-2xl md:text-3xl mx-4 md:mx-6 opacity-70'>✦</span>
-              </div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
       {/* 5. O Nama Section */}
       <section className='relative py-24 md:py-40 overflow-hidden bg-[#0a0b10] border-b border-white/5'>
         <div className='absolute top-0 right-0 w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-[color:var(--color-accent-gold)] opacity-[0.06] blur-[100px] md:blur-[150px] rounded-full z-0 pointer-events-none'></div>
@@ -381,24 +403,24 @@ function Home() {
                 O Nama
               </h4>
               <h3 className='text-4xl md:text-5xl lg:text-6xl mb-8 font-light tracking-wide text-white leading-tight md:leading-tight'>
-                Strastveni tim posvećen <br className="hidden md:block" />
+                Iskustvo koje <br className="hidden md:block" />
                 <span className='font-semibold bg-clip-text text-transparent bg-gradient-to-r from-[color:var(--color-accent-gold)] to-[#ffdf73]'>
-                  nezaboravnim trenucima.
+                  radi razliku
                 </span>
               </h3>
 
               <div className="space-y-6 text-gray-400 text-lg md:text-xl font-light leading-relaxed">
                 <p>
-                  Dobrodošli na DJ Proslave! Mi smo strastveni tim DJ-eva posvećen stvaranju nezaboravnih glazbenih iskustava. Svaki član našeg tima ima jedinstveni stil, iskustvo i spreman je ispuniti svaku glazbenu želju.
+                  Tim profesionalnih DJ-eva i glazbenika s iskustvom u stvaranju atmosfere za najrazličitije vrste događaja – od vjenčanja i privatnih proslava do korporativnih evenata, maturalnih večeri i klubova.
                 </p>
                 <p>
-                  Naš fokus je na beskompromisnoj kvaliteti i profesionalnosti. Razumijemo važnost personalizacije svakog događaja. Bilo da želite profinjen, mirniji ton ili energičnu zabavu do ranih jutarnjih sati, naš tim se brine da svaki detalj odgovara vašoj viziji proslave.
+                  Profesionalnost, pouzdanost i osjećaj za pravi trenutak temelj su svakog našeg angažmana. Svaki nastup prilagođavamo publici, prostoru i energiji događaja kako bi glazba od prvog do posljednjeg takta bila upravo tamo gdje treba biti.
                 </p>
               </div>
 
               <div className="mt-12">
                 <Link to='/o-nama' onClick={() => window.scrollTo(0, 0)} className='inline-flex items-center gap-4 px-8 py-4 rounded-full border border-white/20 text-white hover:bg-white hover:text-black transition-all duration-500 uppercase tracking-widest text-xs font-bold group shadow-lg'>
-                  Upoznaj nas
+                  Upoznajte nas
                   <FontAwesomeIcon icon={faChevronRight} className='transition-transform duration-500 group-hover:translate-x-1.5' />
                 </Link>
               </div>
@@ -445,85 +467,76 @@ function Home() {
         </div>
       </section>
 
-      {/* 6. Galerija Section */}
-      <section className='relative py-24 md:py-40 overflow-hidden bg-[#0a0b10] home-photo-gallery-section-bg'>
-        {/* Glow */}
-        <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[color:var(--color-accent-gold)] opacity-[0.05] blur-[150px] rounded-full z-0 pointer-events-none'></div>
-
+      {/* 6. Google Reviews Section */}
+      <section className='relative py-24 md:py-32 overflow-hidden bg-[#0a0b10] border-t border-white/5'>
+        <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[color:var(--color-accent-gold)] opacity-[0.03] blur-[150px] rounded-full z-0 pointer-events-none'></div>
+        
         <div className='container relative z-10'>
-
-          {/* Header */}
-          <div className='flex flex-col md:flex-row justify-between items-end mb-16 md:mb-24 gap-8'>
-            <div className='w-full md:w-2/3'>
-              <h4 className='text-[color:var(--color-accent-gold)] font-medium tracking-[0.2em] uppercase text-xs md:text-sm mb-6 flex items-center gap-4'>
-                <span className='w-12 h-px bg-[color:var(--color-accent-gold)]'></span>
-                Naš Rad
-              </h4>
-              <h3 className='text-4xl md:text-5xl lg:text-6xl font-light tracking-wide text-white leading-tight'>
-                Vizualni pregled <br className="hidden md:block" />
-                <span className='font-semibold bg-clip-text text-transparent bg-gradient-to-r from-[color:var(--color-accent-gold)] to-[#ffdf73]'>
-                  Galerija.
-                </span>
+          <div className='text-center mb-16 md:mb-20 flex flex-col items-center'>
+            <h4 className='text-[color:var(--color-accent-gold)] font-medium tracking-[0.2em] uppercase text-xs md:text-sm mb-6 flex items-center justify-center gap-4'>
+              <span className='w-12 h-px bg-[color:var(--color-accent-gold)]'></span>
+              Recenzije
+              <span className='w-12 h-px bg-[color:var(--color-accent-gold)]'></span>
+            </h4>
+            <div className='flex items-center justify-center gap-4 mb-4'>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" className="w-10 h-10 md:w-12 md:h-12 shrink-0">
+                <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+                <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+                <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+              </svg>
+              <h3 className='text-4xl md:text-5xl font-bold tracking-wide text-white m-0'>
+                Što kažu klijenti?
               </h3>
             </div>
-
-            <div className='hidden md:block w-full md:w-1/3 text-right'>
-              <Link to='/galerija' onClick={() => window.scrollTo(0, 0)} className='inline-flex items-center gap-4 px-8 py-4 rounded-full border border-white/20 text-white hover:bg-white hover:text-black transition-all duration-500 uppercase tracking-widest text-xs font-bold group shadow-lg'>
-                Pogledajte sve
-                <FontAwesomeIcon icon={faChevronRight} className='transition-transform duration-500 group-hover:translate-x-1.5' />
-              </Link>
+            
+            <div className='flex items-center justify-center gap-3 mb-2 mt-2'>
+              <div className='flex gap-1 text-[#fbbc04] text-2xl'>
+                {[...Array(5)].map((_, idx) => (
+                  <FontAwesomeIcon key={idx} icon={faStar} />
+                ))}
+              </div>
+              <span className='text-white font-bold text-xl'>5.0</span>
             </div>
+            
+            <p className='text-gray-400 font-light text-sm md:text-base mt-2'>
+              Recenzije preuzete s Google Maps
+            </p>
           </div>
 
-          {/* Grid */}
-          <div className='w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10'>
-            {listOfImages.map((img, key) => (
-              <Link
-                to='/galerija'
-                onClick={() => window.scrollTo(0, 0)}
-                key={key}
-                className="block"
+          <div className='grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto'>
+            {displayedReviews.map((review, i) => (
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: i * 0.2, ease: "easeOut" }}
+                className='bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-md shadow-[0_20px_40px_rgba(0,0,0,0.3)] flex flex-col transition-all duration-500 hover:-translate-y-2 hover:bg-white/10 hover:border-white/20 hover:shadow-[0_30px_60px_rgba(0,0,0,0.6)] cursor-default'
               >
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: key * 0.1, ease: "easeOut" }}
-                  onMouseEnter={() => setHovered(img.name)}
-                  onMouseLeave={() => setHovered('')}
-                  className='relative rounded-3xl overflow-hidden aspect-[4/3] shadow-[0_20px_40px_rgba(0,0,0,0.6)] border border-white/5 cursor-pointer group h-full'
-                >
-                  {/* Hover Overlay */}
-                  <div className={`absolute inset-0 bg-black/60 backdrop-blur-[2px] z-20 flex justify-center items-center transition-all duration-500 ${hovered === img.name ? 'opacity-100' : 'opacity-0'}`}>
-                    <div className="px-6 py-3 rounded-full bg-[color:var(--color-accent-gold)] text-black font-bold uppercase tracking-widest text-xs flex items-center justify-center transform transition-transform duration-500 delay-75 scale-50 group-hover:scale-100 shadow-xl">
-                      Pregledaj Galeriju
-                    </div>
+                <div className='flex items-center gap-4 mb-6'>
+                  <div className='w-14 h-14 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center text-xl font-semibold text-white border border-white/10 shrink-0'>
+                    {review.author.charAt(0)}
                   </div>
-
-                  {/* Image */}
-                  <div className='absolute inset-0 z-10'>
-                    <img
-                      className='w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.08]'
-                      src={new URL(`../../assets/images/gallery-optimized/${img.name}.webp`, import.meta.url).href}
-                      alt={img.alt}
-                    />
+                  <div>
+                    <h4 className='text-white font-medium'>{review.author}</h4>
+                    <p className='text-gray-400 text-sm'>{getTimeAgo(review.date)}</p>
                   </div>
-
-                  {/* Subtle bottom gradient for depth */}
-                  <div className='absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent z-15 pointer-events-none'></div>
-                </motion.div>
-              </Link>
+                </div>
+                
+                <div className='flex gap-1 text-[#fbbc04] mb-8 text-sm'>
+                  {[...Array(5)].map((_, idx) => (
+                    <FontAwesomeIcon key={idx} icon={faStar} />
+                  ))}
+                </div>
+                
+                <p className='text-gray-300 font-light leading-relaxed italic relative'>
+                  <span className='text-4xl text-white/10 font-serif absolute -top-4 -left-2'>"</span>
+                  <span className='relative z-10'>{review.text}</span>
+                </p>
+              </motion.div>
             ))}
           </div>
-
-          {/* Mobile Button */}
-          <div className='mt-12 md:hidden flex justify-center'>
-            <Link to='/galerija' onClick={() => window.scrollTo(0, 0)} className='inline-flex items-center gap-4 px-8 py-4 rounded-full border border-white/20 text-white hover:bg-white hover:text-black transition-all duration-500 uppercase tracking-widest text-xs font-bold group shadow-lg'>
-              Pogledajte sve
-              <FontAwesomeIcon icon={faChevronRight} className='transition-transform duration-500 group-hover:translate-x-1.5' />
-            </Link>
-          </div>
-
 
         </div>
       </section>
@@ -552,7 +565,7 @@ function Home() {
                 rel="noreferrer"
                 className='px-10 py-4 rounded-full bg-gradient-to-r from-[color:var(--color-accent-gold)] to-[#ffdf73] text-black font-bold uppercase tracking-widest text-sm hover:shadow-[0_0_30px_rgba(212,175,55,0.6)] hover:scale-105 transition-all duration-300 w-full sm:w-auto text-center'
               >
-                Rezervirajte odmah
+                Rezervirajte termin
               </a>
               <Link
                 to='/kontakt'

@@ -139,7 +139,7 @@ function Services() {
               <div className="mt-auto">
                 <Link to='/dj-za-proslave' onClick={() => window.scrollTo(0, 0)} className='inline-flex items-center gap-4 text-white font-bold uppercase tracking-widest text-xs group/btn'>
                   <span className="border-b border-[color:var(--color-accent-gold)] pb-1 transition-colors duration-300 group-hover/btn:text-[color:var(--color-accent-gold)]">
-                    Saznaj više
+                    Saznajte više
                   </span>
                   <FontAwesomeIcon icon={faArrowRight} className="text-[color:var(--color-accent-gold)] transition-transform duration-300 group-hover/btn:translate-x-2" />
                 </Link>
@@ -185,7 +185,7 @@ function Services() {
               <div className="mt-auto">
                 <Link to='/dj-za-korporativni-dogadaj' onClick={() => window.scrollTo(0, 0)} className='inline-flex items-center gap-4 text-white font-bold uppercase tracking-widest text-xs group/btn'>
                   <span className="border-b border-[color:var(--color-accent-gold)] pb-1 transition-colors duration-300 group-hover/btn:text-[color:var(--color-accent-gold)]">
-                    Saznaj više
+                    Saznajte više
                   </span>
                   <FontAwesomeIcon icon={faArrowRight} className="text-[color:var(--color-accent-gold)] transition-transform duration-300 group-hover/btn:translate-x-2" />
                 </Link>

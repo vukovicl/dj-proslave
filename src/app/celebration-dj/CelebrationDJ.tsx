@@ -194,7 +194,7 @@ function CelebrationDJ() {
               Dopustite nam da vašu proslavu podignemo na novu razinu. Zatražite termin već danas i prepustite brigu o atmosferi nama.
             </p>
             <Link to='/kontakt' onClick={() => window.scrollTo(0, 0)} className="inline-flex items-center gap-4 px-10 py-5 bg-gradient-to-r from-[#d4af37] to-[#ffdf73] text-black font-extrabold uppercase tracking-[0.15em] text-sm hover:scale-105 transition-transform duration-300 shadow-[0_0_30px_rgba(212,175,55,0.3)] rounded-full">
-              Rezerviraj Svoj Termin
+              Rezervirajte Svoj Termin
               <FontAwesomeIcon icon={faArrowRight} />
             </Link>
           </div>
