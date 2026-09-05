@@ -6,6 +6,15 @@ import { Link } from 'react-router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faBuilding, faUsers, faMusic, faSliders } from '@fortawesome/free-solid-svg-icons';
 import { getSeoMeta } from '../utils/seo';
+import {
+  FloatingEdgeVinyl,
+  EdgeVuMeter,
+  FloatingMusicNote,
+  EdgeSparkle,
+  StageLaserBeams,
+  StageSpotlightSweep,
+  CelebrationPartySparkles
+} from '../general/ambient-background/AmbientBackground';
 
 export function meta() {
   return getSeoMeta(
@@ -44,13 +53,15 @@ function EventDJ() {
   const heroOpacity = useTransform(heroProgress, [0, 1], [1, 0]);
 
   return (
-    <div className="bg-[#050508] min-h-screen">
+    <div className="bg-[#050508]/40 backdrop-blur-sm min-h-screen overflow-x-hidden">
       <script 
         type="application/ld+json" 
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} 
       />
       {/* 1. KORPORATIVNI HERO BANNER */}
       <section ref={heroRef} className='relative pt-40 pb-20 md:pt-52 md:pb-32 flex flex-col items-center justify-center overflow-hidden border-b border-white/5'>
+        {/* Dynamic Concert Stage Laser Beams */}
+        <StageLaserBeams />
         {/* Pozadinska slika s gradijentom */}
         <motion.div 
           style={{ y: heroY, opacity: heroOpacity }}
@@ -80,6 +91,15 @@ function EventDJ() {
 
       {/* 2. BENTO GRID - Ključne Prednosti */}
       <section className="py-24 md:py-32 relative">
+        {/* In-section floating edge DJ mixer elements */}
+        <div className='hidden 2xl:flex absolute -left-16 top-1/3 flex-col items-center gap-4 animate-edge-float-1 pointer-events-none'>
+          <EdgeVuMeter label="LIVE" channel={1} />
+          <FloatingMusicNote type="clef" />
+        </div>
+        <div className='hidden 2xl:flex absolute -right-16 top-1/3 flex-col items-center gap-4 animate-edge-float-2 pointer-events-none'>
+          <FloatingEdgeVinyl size={56} reverse />
+          <EdgeSparkle size={18} />
+        </div>
         <div className="container relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             
@@ -140,11 +160,13 @@ function EventDJ() {
       </section>
 
       {/* 3. VRSTE EVENTA - Velika tipografska traka */}
-      <section className="py-24 bg-[#0a0b10] border-y border-white/5 relative overflow-hidden">
+      <section className="py-24 bg-[#0a0b10]/40 backdrop-blur-sm border-y border-white/5 relative overflow-hidden">
+        {/* Dynamic Sweeping Stage Spotlight & Studio Grid */}
+        <StageSpotlightSweep />
         <div className="container relative z-10">
           <div className="flex flex-col md:flex-row items-center gap-16 md:gap-24">
             
-            <div className="w-full md:w-1/3">
+            <div className="w-full md:w-1/3 text-center md:text-left">
               <FontAwesomeIcon icon={faBuilding} className="text-[color:var(--color-accent-gold)] text-4xl mb-6 opacity-80" />
               <h2 className="text-3xl md:text-4xl font-light text-white mb-6">Za koje evente <br/><span className="font-semibold text-[color:var(--color-accent-gold)]">sviramo?</span></h2>
               <p className="text-gray-400 font-light">
@@ -177,6 +199,8 @@ function EventDJ() {
 
       {/* 4. SNAŽAN CTA (Call to Action) */}
       <section className="py-32 relative overflow-hidden text-center">
+        {/* Climax Celebration Energy Aura & Pyro Sparkles */}
+        <CelebrationPartySparkles />
         <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[300px] bg-[color:var(--color-accent-gold)] opacity-[0.08] blur-[120px] rounded-full z-0 pointer-events-none'></div>
         
         <motion.div 

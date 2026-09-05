@@ -6,6 +6,16 @@ import { Link } from 'react-router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faGlassCheers, faMusic, faBolt, faVolumeHigh } from '@fortawesome/free-solid-svg-icons';
 import { getSeoMeta } from '../utils/seo';
+import {
+  FloatingEdgeVinyl,
+  VinylEdgePeeker,
+  FloatingHeadphones,
+  FloatingMusicNote,
+  EdgeSparkle,
+  StageLaserBeams,
+  AudioFrequencyWaveform,
+  CelebrationPartySparkles
+} from '../general/ambient-background/AmbientBackground';
 
 export function meta() {
   return getSeoMeta(
@@ -44,7 +54,7 @@ function CelebrationDJ() {
   const heroOpacity = useTransform(heroProgress, [0, 1], [1, 0]);
 
   return (
-    <div className="bg-[#050508] min-h-screen">
+    <div className="bg-[#050508]/40 backdrop-blur-sm min-h-screen overflow-x-hidden">
       <script 
         type="application/ld+json" 
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} 
@@ -60,6 +70,17 @@ function CelebrationDJ() {
           <div className="absolute inset-0 bg-gradient-to-b from-[#050508]/80 via-[#050508]/60 to-[#050508]"></div>
           <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#d4af37] opacity-[0.05] blur-[150px] rounded-full'></div>
         </motion.div>
+
+        {/* In-section floating edge DJ elements */}
+        <div className='hidden xl:flex absolute left-0 top-1/2 -translate-y-1/2 z-20 flex-col items-start animate-edge-float-1 pointer-events-none'>
+          <VinylEdgePeeker side="left" />
+          <FloatingMusicNote type="single" className="ml-4 mt-2" />
+        </div>
+        <div className='hidden xl:flex absolute right-4 2xl:right-10 top-1/2 -translate-y-1/2 z-20 flex-col items-center gap-4 animate-edge-float-2 pointer-events-none'>
+          <FloatingHeadphones />
+          <FloatingEdgeVinyl size={50} />
+          <EdgeSparkle size={18} />
+        </div>
         
         <div className="container relative z-10 px-4">
           <div className="max-w-5xl mx-auto">
@@ -79,7 +100,9 @@ function CelebrationDJ() {
       </section>
 
       {/* 2. BENTO GRID - Ključne Prednosti */}
-      <section className="py-24 md:py-32 relative">
+      <section className="py-24 md:py-32 relative overflow-hidden">
+        {/* Dynamic Digital Audio Frequency Waveform */}
+        <AudioFrequencyWaveform className="opacity-45" />
         <div className="container relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             
@@ -140,11 +163,13 @@ function CelebrationDJ() {
       </section>
 
       {/* 3. VRSTE PROSLAVA - Velika tipografska traka */}
-      <section className="py-24 bg-[#0a0b10] border-y border-white/5 relative overflow-hidden">
+      <section className="py-24 bg-[#0a0b10]/40 backdrop-blur-sm border-y border-white/5 relative overflow-hidden">
+        {/* Dynamic Concert Stage Laser Beams */}
+        <StageLaserBeams />
         <div className="container relative z-10">
           <div className="flex flex-col md:flex-row items-center gap-16 md:gap-24">
             
-            <div className="w-full md:w-1/3">
+            <div className="w-full md:w-1/3 text-center md:text-left">
               <FontAwesomeIcon icon={faGlassCheers} className="text-[#d4af37] text-4xl mb-6 opacity-80" />
               <h2 className="text-3xl md:text-4xl font-light text-white mb-6">Što sve <br/><span className="font-semibold text-[#d4af37]">slavimo?</span></h2>
               <p className="text-gray-400 font-light">
@@ -177,6 +202,8 @@ function CelebrationDJ() {
 
       {/* 4. SNAŽAN CTA (Call to Action) */}
       <section className="py-32 relative overflow-hidden text-center">
+        {/* Climax Celebration Energy Aura & Pyro Sparkles */}
+        <CelebrationPartySparkles />
         <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[300px] bg-[#d4af37] opacity-[0.08] blur-[120px] rounded-full z-0 pointer-events-none'></div>
         
         <motion.div 

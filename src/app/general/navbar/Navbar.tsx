@@ -82,9 +82,9 @@ function Navbar() {
         </NavLink>
         <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
           <div className="bg-[#1e1e1e]/95 backdrop-blur-xl border border-white/10 rounded-2xl p-2 shadow-[0_10px_30px_rgba(0,0,0,0.5)] flex flex-col gap-1 min-w-[160px]">
-            <Link to="/dj-za-korporativni-dogadaj" className="text-gray-400 hover:text-white hover:bg-white/10 px-4 py-3 rounded-xl transition-colors text-[11px] lg:text-xs font-bold tracking-widest uppercase text-center" onClick={() => window.scrollTo(0, 0)}>Eventi</Link>
-            <Link to="/dj-za-proslave" className="text-gray-400 hover:text-white hover:bg-white/10 px-4 py-3 rounded-xl transition-colors text-[11px] lg:text-xs font-bold tracking-widest uppercase text-center" onClick={() => window.scrollTo(0, 0)}>Proslave</Link>
             <Link to="/dj-za-vjencanja" className="text-gray-400 hover:text-white hover:bg-white/10 px-4 py-3 rounded-xl transition-colors text-[11px] lg:text-xs font-bold tracking-widest uppercase text-center" onClick={() => window.scrollTo(0, 0)}>Vjenčanja</Link>
+            <Link to="/dj-za-proslave" className="text-gray-400 hover:text-white hover:bg-white/10 px-4 py-3 rounded-xl transition-colors text-[11px] lg:text-xs font-bold tracking-widest uppercase text-center" onClick={() => window.scrollTo(0, 0)}>Proslave</Link>
+            <Link to="/dj-za-korporativni-dogadaj" className="text-gray-400 hover:text-white hover:bg-white/10 px-4 py-3 rounded-xl transition-colors text-[11px] lg:text-xs font-bold tracking-widest uppercase text-center" onClick={() => window.scrollTo(0, 0)}>Eventi</Link>
           </div>
         </div>
       </li>
@@ -122,11 +122,11 @@ function Navbar() {
         <div className={`overflow-hidden transition-all duration-300 ${isServicesOpen ? 'max-h-[300px] opacity-100 mb-2' : 'max-h-0 opacity-0'}`}>
           <div className="flex flex-col gap-1 pl-12 pr-2">
             <NavLink
-              to="/dj-za-korporativni-dogadaj"
+              to="/dj-za-vjencanja"
               onClick={() => { window.scrollTo(0, 0); closeMenu(); }}
               className={({ isActive }) => `px-4 py-3 rounded-xl text-xs font-bold tracking-widest uppercase transition-all ${isActive ? 'text-[color:var(--color-accent-gold)] bg-white/5' : 'text-gray-400 hover:text-white hover:bg-white/10'}`}
             >
-              Eventi
+              Vjenčanja
             </NavLink>
             <NavLink
               to="/dj-za-proslave"
@@ -136,11 +136,11 @@ function Navbar() {
               Proslave
             </NavLink>
             <NavLink
-              to="/dj-za-vjencanja"
+              to="/dj-za-korporativni-dogadaj"
               onClick={() => { window.scrollTo(0, 0); closeMenu(); }}
               className={({ isActive }) => `px-4 py-3 rounded-xl text-xs font-bold tracking-widest uppercase transition-all ${isActive ? 'text-[color:var(--color-accent-gold)] bg-white/5' : 'text-gray-400 hover:text-white hover:bg-white/10'}`}
             >
-              Vjenčanja
+              Eventi
             </NavLink>
           </div>
         </div>

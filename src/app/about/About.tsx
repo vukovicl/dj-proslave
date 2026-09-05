@@ -8,6 +8,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faHeadphones, faSliders, faArrowRight, faChevronDown, faChevronUp, faChevronLeft, faChevronRight, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router';
 import { getSeoMeta } from '../utils/seo';
+import {
+  FloatingEdgeVinyl,
+  EdgeVuMeter,
+  VinylEdgePeeker,
+  FloatingHeadphones,
+  FloatingMusicNote,
+  EdgeSparkle,
+  StageLaserBeams,
+  AudioFrequencyWaveform,
+  CelebrationPartySparkles
+} from '../general/ambient-background/AmbientBackground';
 
 export function meta() {
   return getSeoMeta(
@@ -103,7 +114,7 @@ function About() {
   const y = useParallax(scrollYProgress);
   
   return (
-    <div className="bg-[#050508] w-full max-w-[100vw] overflow-x-hidden">
+    <div className="bg-[#050508]/40 backdrop-blur-sm w-full max-w-[100vw] overflow-x-hidden">
       <script 
         type="application/ld+json" 
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} 
@@ -138,10 +149,23 @@ function About() {
             </p>
           </motion.div>
         </div>
+
+        {/* In-section floating edge DJ elements */}
+        <div className='hidden xl:flex absolute left-4 2xl:left-8 top-1/2 -translate-y-1/2 z-20 flex-col items-center gap-4 animate-edge-float-1 pointer-events-none'>
+          <FloatingEdgeVinyl size={50} />
+          <FloatingMusicNote type="double" />
+        </div>
+        <div className='hidden xl:flex absolute right-4 2xl:right-8 top-1/2 -translate-y-1/2 z-20 flex-col items-center gap-4 animate-edge-float-2 pointer-events-none'>
+          <FloatingHeadphones />
+          <EdgeSparkle size={18} />
+        </div>
       </section>
 
       {/* 2. Asymmetric Story Section */}
-      <section className='py-24 md:py-40 relative'>
+      <section className='py-24 md:py-40 relative overflow-hidden bg-[#050508]/40 backdrop-blur-sm'>
+        {/* Concert Stage Laser Beams */}
+        <StageLaserBeams />
+
         <div className="container">
           <div className='flex flex-col lg:flex-row items-center gap-12 lg:gap-0'>
             
@@ -237,9 +261,12 @@ function About() {
       </section>
 
       {/* 3. Minimalist Philosophy Section */}
-      <section className='py-24 bg-[#0a0b10] border-t border-b border-white/5'>
+      <section className='py-24 bg-[#0a0b10]/40 backdrop-blur-sm border-t border-b border-white/5 relative overflow-hidden'>
+        {/* Dynamic Digital Audio Frequency Waveform */}
+        <AudioFrequencyWaveform />
+
         <div className="container">
-          <div className='mb-16 md:mb-24 flex flex-col md:flex-row justify-between items-end gap-8'>
+          <div className='mb-16 md:mb-24 flex flex-col md:flex-row justify-between items-center md:items-end gap-8 text-center md:text-left'>
             <h3 className='text-4xl md:text-5xl font-light tracking-wide text-white leading-tight'>
               Zašto odabrati <br /> <span className='font-semibold text-[color:var(--color-accent-gold)]'>nas?</span>
             </h3>
@@ -326,7 +353,7 @@ function About() {
           >
             {[...Array(4)].map((_, i) => (
               <div key={i} className='flex items-center'>
-                <span className='text-5xl md:text-7xl font-black uppercase tracking-wider mx-6 md:mx-12 text-transparent' style={{ WebkitTextStroke: '1px rgba(255,255,255,0.2)' }}>Narodno</span>
+                <span className='text-5xl md:text-7xl font-black uppercase tracking-wider mx-6 md:mx-12 text-transparent' style={{ WebkitTextStroke: '1.5px #d1d5db' }}>Narodno</span>
                 <span className='text-[color:var(--color-accent-gold)] text-2xl md:text-3xl mx-4 md:mx-6 opacity-70'>✦</span>
                 <span className='text-5xl md:text-7xl font-black uppercase tracking-wider mx-6 md:mx-12 text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]'>Cro Trash</span>
                 <span className='text-[color:var(--color-accent-gold)] text-2xl md:text-3xl mx-4 md:mx-6 opacity-70'>✦</span>
@@ -334,7 +361,7 @@ function About() {
                 <span className='text-[color:var(--color-accent-gold)] text-2xl md:text-3xl mx-4 md:mx-6 opacity-70'>✦</span>
                 <span className='text-5xl md:text-7xl font-black uppercase tracking-wider mx-6 md:mx-12 text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]'>Pop</span>
                 <span className='text-[color:var(--color-accent-gold)] text-2xl md:text-3xl mx-4 md:mx-6 opacity-70'>✦</span>
-                <span className='text-5xl md:text-7xl font-black uppercase tracking-wider mx-6 md:mx-12 text-transparent' style={{ WebkitTextStroke: '1px rgba(255,255,255,0.2)' }}>Disco</span>
+                <span className='text-5xl md:text-7xl font-black uppercase tracking-wider mx-6 md:mx-12 text-transparent' style={{ WebkitTextStroke: '1.5px #d1d5db' }}>Disco</span>
                 <span className='text-[color:var(--color-accent-gold)] text-2xl md:text-3xl mx-4 md:mx-6 opacity-70'>✦</span>
                 <span className='text-5xl md:text-7xl font-black uppercase tracking-wider mx-6 md:mx-12 text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]'>R&amp;B</span>
                 <span className='text-[color:var(--color-accent-gold)] text-2xl md:text-3xl mx-4 md:mx-6 opacity-70'>✦</span>
@@ -352,7 +379,7 @@ function About() {
           >
             {[...Array(4)].map((_, i) => (
               <div key={i} className='flex items-center'>
-                <span className='text-5xl md:text-7xl font-black uppercase tracking-wider mx-6 md:mx-12 text-transparent' style={{ WebkitTextStroke: '1px rgba(255,255,255,0.2)' }}>EDM</span>
+                <span className='text-5xl md:text-7xl font-black uppercase tracking-wider mx-6 md:mx-12 text-transparent' style={{ WebkitTextStroke: '1.5px #d1d5db' }}>EDM</span>
                 <span className='text-[color:var(--color-accent-gold)] text-2xl md:text-3xl mx-4 md:mx-6 opacity-70'>✦</span>
                 <span className='text-5xl md:text-7xl font-black uppercase tracking-wider mx-6 md:mx-12 text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]'>Latino</span>
                 <span className='text-[color:var(--color-accent-gold)] text-2xl md:text-3xl mx-4 md:mx-6 opacity-70'>✦</span>
@@ -360,7 +387,7 @@ function About() {
                 <span className='text-[color:var(--color-accent-gold)] text-2xl md:text-3xl mx-4 md:mx-6 opacity-70'>✦</span>
                 <span className='text-5xl md:text-7xl font-black uppercase tracking-wider mx-6 md:mx-12 text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]'>Ex-yu</span>
                 <span className='text-[color:var(--color-accent-gold)] text-2xl md:text-3xl mx-4 md:mx-6 opacity-70'>✦</span>
-                <span className='text-5xl md:text-7xl font-black uppercase tracking-wider mx-6 md:mx-12 text-transparent' style={{ WebkitTextStroke: '1px rgba(255,255,255,0.2)' }}>Strani hitovi</span>
+                <span className='text-5xl md:text-7xl font-black uppercase tracking-wider mx-6 md:mx-12 text-transparent' style={{ WebkitTextStroke: '1.5px #d1d5db' }}>Strani hitovi</span>
                 <span className='text-[color:var(--color-accent-gold)] text-2xl md:text-3xl mx-4 md:mx-6 opacity-70'>✦</span>
               </div>
             ))}
@@ -369,7 +396,17 @@ function About() {
       </section>
 
       {/* 5. Performers Section */}
-      <section className='py-24 md:py-32 bg-[#0a0b10] relative border-t border-white/5'>
+      <section className='py-24 md:py-32 bg-[#0a0b10]/40 backdrop-blur-sm relative overflow-hidden border-t border-white/5'>
+        {/* In-section floating edge DJ elements */}
+        <div className='hidden xl:flex absolute left-4 2xl:left-8 top-1/3 -translate-y-1/2 z-20 flex-col items-center gap-4 animate-edge-float-2 pointer-events-none'>
+          <FloatingHeadphones />
+          <FloatingMusicNote type="beam" />
+        </div>
+        <div className='hidden xl:flex absolute right-4 2xl:right-8 top-1/3 -translate-y-1/2 z-20 flex-col items-center gap-4 animate-edge-float-1 pointer-events-none'>
+          <FloatingEdgeVinyl size={48} />
+          <EdgeSparkle size={18} />
+        </div>
+
         <div className='container'>
           <div className='mb-12 md:mb-16 text-center'>
             <h3 className='text-3xl md:text-5xl font-light tracking-wide text-white mb-4'>
@@ -499,7 +536,10 @@ function About() {
       </AnimatePresence>
 
       {/* 6. Full-width Solid Gold CTA */}
-      <section className='py-24 md:py-32 bg-[#050508]'>
+      <section className='py-24 md:py-32 bg-[#050508]/40 backdrop-blur-sm relative overflow-hidden'>
+        {/* Climax Celebration Party Sparkles & Energy Aura */}
+        <CelebrationPartySparkles />
+
         <div className='container'>
           <div className='flex flex-col md:flex-row justify-between items-center bg-[color:var(--color-accent-gold)] p-12 md:p-16 rounded-sm relative overflow-hidden'>
             <div className="absolute right-0 top-0 w-[60%] h-full bg-white opacity-20 skew-x-[30deg] translate-x-20 pointer-events-none hidden md:block"></div>

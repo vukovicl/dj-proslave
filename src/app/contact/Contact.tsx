@@ -7,6 +7,15 @@ import { faInstagram, faTiktok, faYoutube, faFacebook } from '@fortawesome/free-
 import { Link } from 'react-router';
 import emailjs from '@emailjs/browser';
 import { getSeoMeta } from '../utils/seo';
+import {
+  FloatingEdgeVinyl,
+  EdgeVuMeter,
+  VinylEdgePeeker,
+  FloatingHeadphones,
+  FloatingMusicNote,
+  EdgeSparkle,
+  AudioFrequencyWaveform
+} from '../general/ambient-background/AmbientBackground';
 
 export function meta() {
   return getSeoMeta(
@@ -234,7 +243,7 @@ function Contact() {
   };
 
   return (
-    <div className="bg-[#050508] min-h-screen pb-20 md:pb-32">
+    <div className="bg-[#050508]/40 backdrop-blur-sm min-h-screen pb-20 md:pb-32">
       <script 
         type="application/ld+json" 
         dangerouslySetInnerHTML={{ __html: JSON.stringify([structuredData, faqSchema]) }} 
@@ -246,6 +255,17 @@ function Contact() {
         <div className="absolute rounded-full blur-[120px] opacity-15 pointer-events-none animate-float w-[250px] md:w-[500px] h-[250px] md:h-[500px] bg-[radial-gradient(circle,#ffdf73,transparent)] bottom-[-150px] right-[-50px] md:right-[-150px] [animation-delay:5s]"></div>
         <div className="absolute rounded-full blur-[120px] opacity-15 pointer-events-none animate-float w-[200px] md:w-[400px] h-[200px] md:h-[400px] bg-[radial-gradient(circle,var(--color-accent-gold),transparent)] top-[50%] right-[10%] [animation-delay:10s]"></div>
         <div className="absolute rounded-full blur-[120px] opacity-15 pointer-events-none animate-float w-[200px] md:w-[400px] h-[200px] md:h-[400px] bg-[radial-gradient(circle,#ffdf73,transparent)] top-[50%] left-[0] [animation-delay:10s]"></div>
+        
+        {/* In-section floating edge DJ elements */}
+        <div className='hidden xl:flex absolute -left-16 2xl:-left-20 top-1/4 z-20 flex-col items-center gap-4 animate-edge-float-1 pointer-events-none'>
+          <FloatingEdgeVinyl size={56} />
+          <FloatingMusicNote type="double" />
+        </div>
+        <div className='hidden xl:flex absolute -right-16 2xl:-right-20 top-1/4 z-20 flex-col items-center gap-4 animate-edge-float-2 pointer-events-none'>
+          <FloatingHeadphones />
+          <EdgeVuMeter label="INBOX" channel={1} />
+          <EdgeSparkle size={18} />
+        </div>
         
         <header>
           <div className="relative text-center pt-8 pb-12 md:pb-24">
@@ -558,7 +578,9 @@ function Contact() {
       </section>
 
       {/* 3. FAQ SEKCIJA (Prema korisničkom predlošku) */}
-      <section id="cesta-pitanja" className='faq pb-20 md:pb-40 scroll-mt-[100px] md:scroll-mt-[120px] bg-[#0a0a0d] border-t border-white/5 relative'>
+      <section id="cesta-pitanja" className='faq pb-20 md:pb-40 scroll-mt-[100px] md:scroll-mt-[120px] bg-[#0a0a0d]/40 backdrop-blur-sm border-t border-white/5 relative overflow-hidden'>
+        {/* Dynamic Digital Audio Frequency Waveform */}
+        <AudioFrequencyWaveform className="opacity-35" />
         <div className="mt-20 md:mt-32 max-w-4xl mx-auto relative px-4 z-10">
           <div className="absolute rounded-full blur-[120px] opacity-15 pointer-events-none animate-float w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-[radial-gradient(circle,var(--color-accent-gold),transparent)] top-[-150px] left-[-200px] [animation-delay:0s]"></div>
           

@@ -10,6 +10,16 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import aboutHeroImg from '../../assets/images/closeup-dj-working-blue-light.webp'
 import { getSeoMeta } from '../utils/seo';
+import {
+  FloatingEdgeVinyl,
+  EdgeVuMeter,
+  VinylEdgePeeker,
+  FloatingHeadphones,
+  FloatingMusicNote,
+  EdgeSparkle,
+  StageLaserBeams,
+  AudioFrequencyWaveform
+} from '../general/ambient-background/AmbientBackground';
 
 export function meta() {
   return getSeoMeta(
@@ -58,11 +68,11 @@ function Gallery() {
   };
 
   const nextLightboxImg = useCallback(() => {
-    setActiveZoomImg((prev) => (prev === listOfImages.length - 1 ? 0 : prev + 1));
+    setActiveZoomImg((prev) => (prev + 1) % listOfImages.length);
   }, [listOfImages.length]);
 
   const prevLightboxImg = useCallback(() => {
-    setActiveZoomImg((prev) => (prev === 0 ? listOfImages.length - 1 : prev - 1));
+    setActiveZoomImg((prev) => (prev - 1 + listOfImages.length) % listOfImages.length);
   }, [listOfImages.length]);
 
   // Lock scroll when lightbox is active
@@ -90,7 +100,7 @@ function Gallery() {
   }, [isZoomActive, nextLightboxImg, prevLightboxImg]);
 
   return (
-    <div className="bg-[#050508] min-h-screen">
+    <div className="bg-[#050508]/40 backdrop-blur-sm min-h-screen relative overflow-x-hidden">
       
       {/* 1. Hero Banner */}
       <section className='relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden border-b border-white/5'>
@@ -98,6 +108,16 @@ function Gallery() {
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-[#050508] z-10"></div>
           <div className="w-full h-full bg-cover bg-center opacity-40" style={{ backgroundImage: `url(${aboutHeroImg})` }}></div>
+        </div>
+
+        {/* In-section floating edge DJ elements */}
+        <div className='hidden xl:flex absolute left-4 2xl:left-10 top-1/2 -translate-y-1/2 z-20 flex-col items-center gap-4 animate-edge-float-1 pointer-events-none'>
+          <FloatingEdgeVinyl size={50} />
+          <FloatingMusicNote type="double" />
+        </div>
+        <div className='hidden xl:flex absolute right-4 2xl:right-10 top-1/2 -translate-y-1/2 z-20 flex-col items-center gap-4 animate-edge-float-2 pointer-events-none'>
+          <FloatingHeadphones />
+          <EdgeSparkle size={18} />
         </div>
 
         {/* Content */}
@@ -117,9 +137,66 @@ function Gallery() {
         </div>
       </section>
 
-      {/* 2. Photo Gallery (Masonry Grid) */}
-      <section className='py-20 md:py-32 relative'>
-        <div className='absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[color:var(--color-accent-gold)] opacity-[0.03] blur-[120px] rounded-full z-0 pointer-events-none'></div>
+      {/* 2. Video Gallery (FIRST - High visual focus) */}
+      <section id="video" className='py-20 md:py-28 relative bg-[#07080c]/40 backdrop-blur-sm overflow-hidden border-b border-white/5'>
+        {/* Dynamic Concert Stage Laser Beams & Cinema Glow */}
+        <StageLaserBeams />
+        <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[550px] bg-[radial-gradient(ellipse_at_center,rgba(194,167,90,0.16)_0%,rgba(99,102,241,0.06)_50%,transparent_75%)] blur-[130px] pointer-events-none z-0 animate-ambient-pulse'></div>
+        <div className='absolute -top-10 left-10 w-[400px] h-[400px] bg-[radial-gradient(circle,rgba(255,223,115,0.08)_0%,transparent_70%)] blur-[100px] pointer-events-none z-0 animate-ambient-drift-1'></div>
+
+        <div className='container relative z-10'>
+          <div className='mb-12 md:mb-16 text-center md:text-left flex flex-col md:flex-row md:items-end justify-between gap-6'>
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[color:var(--color-accent-gold)]/10 border border-[color:var(--color-accent-gold)]/30 text-[color:var(--color-accent-gold)] text-[11px] font-bold tracking-widest uppercase mb-4">
+                <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+                Uživo s nastupa
+              </div>
+              <h2 className="text-4xl md:text-5xl font-light text-white tracking-wide mb-4">
+                Video <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[color:var(--color-accent-gold)] to-[#ffdf73]">Galerija</span>
+              </h2>
+              <div className='w-20 md:w-24 h-1 bg-gradient-to-r from-[color:var(--color-accent-gold)] to-transparent rounded-full mx-auto md:mx-0'></div>
+            </div>
+            <p className="text-gray-400 text-sm md:text-base font-light max-w-md text-center md:text-right">
+              Doživite energiju, plesni podij i atmosferu na našim nastupima u kratkim video isječcima.
+            </p>
+          </div>
+
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10'>
+            {listOfVideos.map((video, key) => (
+              <motion.div 
+                key={key} 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: key * 0.15 }}
+                className='w-full rounded-2xl overflow-hidden border border-white/15 bg-black/80 shadow-[0_20px_50px_rgba(0,0,0,0.8)] group relative hover:border-[color:var(--color-accent-gold)]/60 transition-all duration-500'
+              >
+                {/* Cinema ambient backlight on hover */}
+                <div className="absolute -inset-1 bg-gradient-to-r from-[color:var(--color-accent-gold)]/30 via-transparent to-[color:var(--color-accent-gold)]/30 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-700 pointer-events-none"></div>
+                
+                <div className="relative w-full aspect-[9/16] bg-black flex items-center justify-center z-10">
+                  <iframe
+                    className="w-full h-full absolute inset-0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    src={video.src}
+                    title={`Video ${key + 1}`}
+                  >
+                  </iframe>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 3. Photo Gallery (Masonry Grid - SECOND) */}
+      <section className='py-20 md:py-32 relative overflow-hidden'>
+        {/* Dynamic Digital Audio Frequency Waveform */}
+        <AudioFrequencyWaveform className="opacity-40" />
+        <div className='absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-[radial-gradient(circle,rgba(194,167,90,0.12)_0%,transparent_70%)] blur-[120px] rounded-full z-0 pointer-events-none animate-ambient-drift-2'></div>
+        <div className='absolute bottom-0 right-10 w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(99,102,241,0.06)_0%,transparent_70%)] blur-[110px] rounded-full z-0 pointer-events-none animate-ambient-drift-1'></div>
+        <div className='absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.025)_1px,transparent_1px)] [background-size:32px_32px] pointer-events-none z-0'></div>
 
         <div className='container relative z-10'>
           <div className='mb-12 md:mb-16 text-center md:text-left'>
@@ -155,44 +232,6 @@ function Gallery() {
                    <div className="w-14 h-14 rounded-full bg-white/10 border border-white/20 backdrop-blur-md flex items-center justify-center transform transition-transform duration-500 scale-50 group-hover:scale-100">
                      <FontAwesomeIcon icon={faMaximize} className='text-white text-lg' />
                    </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 3. Video Gallery */}
-      <section id="video" className='py-20 md:py-32 relative bg-[#0a0b10] border-t border-white/5'>
-        <div className='container relative z-10'>
-          <div className='mb-12 md:mb-16 text-center md:text-left'>
-            <h2 className="text-4xl md:text-5xl font-light text-white tracking-wide mb-4">
-              Video <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[color:var(--color-accent-gold)] to-[#ffdf73]">Galerija</span>
-            </h2>
-            <div className='w-20 md:w-24 h-1 bg-gradient-to-r from-[color:var(--color-accent-gold)] to-transparent rounded-full mx-auto md:mx-0'></div>
-          </div>
-
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12'>
-            {listOfVideos.map((video, key) => (
-              <motion.div 
-                key={key} 
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: key * 0.2 }}
-                className='w-full rounded-2xl overflow-hidden border border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.5)] group relative'
-              >
-                <div className="absolute -inset-1 bg-gradient-to-r from-transparent via-[color:var(--color-accent-gold)] to-transparent opacity-0 group-hover:opacity-20 blur transition duration-500 rounded-2xl"></div>
-                
-                <div className="relative w-full aspect-[9/16] bg-black flex items-center justify-center z-10">
-                  <iframe
-                    className="w-full h-full absolute inset-0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    src={video.src}
-                    title={`Video ${key + 1}`}
-                  >
-                  </iframe>
                 </div>
               </motion.div>
             ))}

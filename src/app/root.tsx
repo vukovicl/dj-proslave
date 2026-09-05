@@ -13,6 +13,7 @@ import type { Route } from "./+types/root";
 import Navbar from './general/navbar/Navbar';
 import Footer from './general/footer/Footer';
 import FloatingContactButton from './general/floating-contact/FloatingContactButton';
+import AmbientBackground from './general/ambient-background/AmbientBackground';
 
 import stylesheet from "../styles.css?url";
 import navbarStylesheet from "./general/navbar/Navbar.scss?url";
@@ -69,7 +70,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
 export default function App() {
   return (
     <div className="overflow-x-hidden w-full relative">
-      <div className='min-h-screen grid grid-rows-[auto_1fr_auto]'>
+      <AmbientBackground />
+      <div className='min-h-screen grid grid-rows-[auto_1fr_auto] relative z-10'>
         <Navbar />
         <Outlet />
         <Footer />

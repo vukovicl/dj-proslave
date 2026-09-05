@@ -24,6 +24,88 @@
   }
 }
 
+/* Hero stage lighting & dynamic spotlights */
+@keyframes heroSpotlightGlow {
+  0%, 100% {
+    transform: scale(1) translate3d(0, 0, 0);
+    opacity: 0.22;
+  }
+  50% {
+    transform: scale(1.25) translate3d(-3%, -2%, 0);
+    opacity: 0.38;
+  }
+}
+
+@keyframes heroBeamSweep {
+  0% {
+    transform: rotate(-18deg) translateY(-20px);
+    opacity: 0.12;
+  }
+  50% {
+    transform: rotate(18deg) translateY(20px);
+    opacity: 0.32;
+  }
+  100% {
+    transform: rotate(-18deg) translateY(-20px);
+    opacity: 0.12;
+  }
+}
+
+@keyframes buttonShimmerSweep {
+  0% {
+    left: -120%;
+  }
+  25%, 100% {
+    left: 220%;
+  }
+}
+
+@keyframes eqBarPulse {
+  0%, 100% {
+    transform: scaleY(0.25);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes vinylRipples {
+  0% {
+    transform: translate(-50%, -50%) scale(0.85);
+    opacity: 0.45;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1);
+    opacity: 0.1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(0.85);
+    opacity: 0.45;
+  }
+}
+
+.animate-hero-spotlight {
+  animation: heroSpotlightGlow 12s ease-in-out infinite alternate;
+}
+
+.animate-hero-beam {
+  animation: heroBeamSweep 16s ease-in-out infinite alternate;
+}
+
+.animate-button-shimmer {
+  animation: buttonShimmerSweep 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.animate-eq-1 { animation: eqBarPulse 0.9s ease-in-out infinite alternate; transform-origin: bottom; }
+.animate-eq-2 { animation: eqBarPulse 1.2s ease-in-out infinite alternate 0.2s; transform-origin: bottom; }
+.animate-eq-3 { animation: eqBarPulse 0.7s ease-in-out infinite alternate 0.4s; transform-origin: bottom; }
+.animate-eq-4 { animation: eqBarPulse 1.1s ease-in-out infinite alternate 0.1s; transform-origin: bottom; }
+.animate-eq-5 { animation: eqBarPulse 0.8s ease-in-out infinite alternate 0.3s; transform-origin: bottom; }
+
+.animate-vinyl-ripple-1 { animation: vinylRipples 8s ease-in-out infinite; }
+.animate-vinyl-ripple-2 { animation: vinylRipples 8s ease-in-out infinite 2.5s; }
+.animate-vinyl-ripple-3 { animation: vinylRipples 8s ease-in-out infinite 5s; }
+
 .home-landing-section {
   background-color: var(--bs-body-bg);
   padding: 150px 0 100px 0;

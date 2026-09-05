@@ -6,6 +6,15 @@ import { Link } from 'react-router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faHeart, faMusic, faStar, faGlassCheers } from '@fortawesome/free-solid-svg-icons';
 import { getSeoMeta } from '../utils/seo';
+import {
+  FloatingEdgeVinyl,
+  FloatingHeadphones,
+  FloatingMusicNote,
+  EdgeSparkle,
+  StageLaserBeams,
+  AudioFrequencyWaveform,
+  CelebrationPartySparkles
+} from '../general/ambient-background/AmbientBackground';
 
 export function meta() {
   return getSeoMeta(
@@ -44,7 +53,7 @@ function WeddingDJ() {
   const heroOpacity = useTransform(heroProgress, [0, 1], [1, 0]);
 
   return (
-    <div className="bg-[#050508] min-h-screen">
+    <div className="bg-[#050508]/40 backdrop-blur-sm min-h-screen overflow-x-hidden">
       <script 
         type="application/ld+json" 
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} 
@@ -61,6 +70,17 @@ function WeddingDJ() {
           {/* Romantični, topli glow */}
           <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#d4af37] opacity-[0.06] blur-[150px] rounded-full'></div>
         </motion.div>
+
+        {/* In-section floating edge DJ elements */}
+        <div className='hidden xl:flex absolute left-4 2xl:left-10 top-1/2 -translate-y-1/2 z-20 flex-col items-center gap-4 animate-edge-float-1 pointer-events-none'>
+          <FloatingEdgeVinyl size={52} />
+          <FloatingMusicNote type="double" />
+        </div>
+        <div className='hidden xl:flex absolute right-4 2xl:right-10 top-1/2 -translate-y-1/2 z-20 flex-col items-center gap-4 animate-edge-float-2 pointer-events-none'>
+          <FloatingHeadphones />
+          <EdgeSparkle size={18} />
+          <FloatingMusicNote type="single" />
+        </div>
         
         <div className="container relative z-10 px-4">
           <div className="max-w-5xl mx-auto text-center">
@@ -81,7 +101,9 @@ function WeddingDJ() {
       </section>
 
       {/* 2. BENTO GRID - Fokus na mladence */}
-      <section className="py-24 md:py-32 relative">
+      <section className="py-24 md:py-32 relative overflow-hidden">
+        {/* Dynamic Concert Stage Laser Beams */}
+        <StageLaserBeams />
         <div className="container relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             
@@ -142,12 +164,14 @@ function WeddingDJ() {
       </section>
 
       {/* 3. TIMELINE VJENČANJA - Posebna pažnja svakom detalju */}
-      <section className="py-24 bg-[#0a0b10] border-y border-white/5 relative overflow-hidden">
+      <section className="py-24 bg-[#0a0b10]/40 backdrop-blur-sm border-y border-white/5 relative overflow-hidden">
+        {/* Dynamic Digital Audio Frequency Waveform */}
+        <AudioFrequencyWaveform className="opacity-45" />
         <div className="container relative z-10">
           <div className="flex flex-col lg:flex-row gap-16 lg:gap-24">
             
             <div className="w-full lg:w-5/12 relative">
-              <div className="sticky top-32">
+              <div className="sticky top-32 text-center lg:text-left">
                 <FontAwesomeIcon icon={faGlassCheers} className="text-[#d4af37] text-4xl mb-6 opacity-80" />
                 <h2 className="text-3xl md:text-4xl font-light text-white mb-6 leading-snug">Uz Vas od prvog <br/><span className="font-semibold italic text-[#d4af37]">do zadnjeg takta.</span></h2>
                 <p className="text-gray-400 font-light leading-relaxed mb-8">
@@ -201,6 +225,8 @@ function WeddingDJ() {
 
       {/* 4. SNAŽAN CTA (Osobni kontakt) */}
       <section className="py-32 relative overflow-hidden text-center">
+        {/* Climax Celebration Energy Aura & Pyro Sparkles */}
+        <CelebrationPartySparkles />
         <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[300px] bg-[#d4af37] opacity-[0.08] blur-[120px] rounded-full z-0 pointer-events-none'></div>
         
         <motion.div 

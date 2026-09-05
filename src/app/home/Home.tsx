@@ -20,6 +20,18 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router';
 import { getSeoMeta } from '../utils/seo';
+import {
+  FloatingEdgeVinyl,
+  EdgeVuMeter,
+  VinylEdgePeeker,
+  FloatingHeadphones,
+  FloatingMusicNote,
+  EdgeSparkle,
+  StageLaserBeams,
+  AudioFrequencyWaveform,
+  StageSpotlightSweep,
+  CelebrationPartySparkles
+} from '../general/ambient-background/AmbientBackground';
 
 const reviewsData = [
   { author: "Ana Cvitanović", text: "Na maturalnoj napravljena top atmosfera, sve naše želje ispunjene i sve ispoštovano🔝🔝", date: new Date('2026-07-15') },
@@ -165,6 +177,10 @@ function Home() {
       />
       <section className='relative h-screen w-full flex items-center bg-[#0a0b10] overflow-hidden'>
 
+        {/* Dynamic Concert Stage Lighting & Spotlight Effects */}
+        <div className='absolute -top-24 right-10 md:right-1/4 w-[450px] md:w-[650px] h-[450px] md:h-[650px] bg-[radial-gradient(circle,rgba(255,223,115,0.22)_0%,rgba(194,167,90,0.08)_40%,transparent_70%)] blur-[100px] rounded-full pointer-events-none z-10 animate-hero-spotlight'></div>
+        <div className='absolute top-1/4 -right-16 w-[350px] h-[700px] bg-gradient-to-b from-[color:var(--color-accent-gold)]/15 via-transparent to-transparent rotate-[-20deg] blur-[80px] pointer-events-none z-10 animate-hero-beam'></div>
+
         {/* Background Image on Right with Gradient Mask */}
         <div className='absolute inset-0 z-0'>
           <div
@@ -183,14 +199,23 @@ function Home() {
         <div className='container relative z-20 pt-20 px-6 md:px-8'>
           <div className='max-w-2xl text-left'>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
+            {/* Dynamic live badge with equalizer bars */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className='text-[color:var(--color-accent-gold)] uppercase tracking-[0.15em] text-sm md:text-base font-semibold mb-4'
+              className='inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-black/60 border border-[color:var(--color-accent-gold)]/40 backdrop-blur-md shadow-[0_0_25px_rgba(194,167,90,0.25)] mb-5'
             >
-              STVARAMO ATMOSFERU KOJA SE PAMTI
-            </motion.p>
+              <div className='flex items-end gap-1 h-3.5'>
+                <span className='w-1 bg-[color:var(--color-accent-gold)] rounded-full h-3 animate-eq-1'></span>
+                <span className='w-1 bg-[color:var(--color-accent-gold)] rounded-full h-2 animate-eq-2'></span>
+                <span className='w-1 bg-[color:var(--color-accent-gold)] rounded-full h-3.5 animate-eq-3'></span>
+                <span className='w-1 bg-[color:var(--color-accent-gold)] rounded-full h-2 animate-eq-4'></span>
+              </div>
+              <span className='text-[color:var(--color-accent-gold)] uppercase tracking-[0.2em] text-xs font-bold'>
+                Stvaramo atmosferu koja se pamti
+              </span>
+            </motion.div>
 
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
@@ -220,9 +245,11 @@ function Home() {
               <Link
                 to='/kontakt'
                 onClick={() => window.scrollTo(0, 0)}
-                className='px-8 h-12 md:h-14 inline-flex items-center justify-center bg-[color:var(--color-accent-gold)] text-black font-bold uppercase tracking-widest text-sm hover:bg-[#ffdf73] transition-colors shadow-[0_0_20px_rgba(212,175,55,0.3)] hover:shadow-[0_0_30px_rgba(212,175,55,0.6)] leading-none pt-1'
+                className='relative overflow-hidden px-8 h-12 md:h-14 inline-flex items-center justify-center bg-gradient-to-r from-[color:var(--color-accent-gold)] to-[#ffdf73] text-black font-bold uppercase tracking-widest text-sm hover:scale-[1.03] transition-all duration-300 shadow-[0_0_25px_rgba(212,175,55,0.4)] hover:shadow-[0_0_40px_rgba(212,175,55,0.7)] leading-none pt-1 group'
               >
-                Zatražite ponudu
+                <span className='relative z-10'>Zatražite ponudu</span>
+                {/* Light sweep animation */}
+                <span className='absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/50 to-transparent skew-x-[-25deg] animate-button-shimmer pointer-events-none'></span>
               </Link>
               <Link
                 to='/o-nama'
@@ -234,12 +261,24 @@ function Home() {
             </motion.div>
           </div>
         </div>
+
+        {/* In-section floating edge DJ elements */}
+        <div className='hidden xl:flex absolute left-4 2xl:left-10 top-1/3 z-20 flex-col items-center gap-4 animate-edge-float-1 pointer-events-none'>
+          <FloatingEdgeVinyl size={52} />
+          <FloatingMusicNote type="double" />
+        </div>
+        <div className='hidden xl:flex absolute right-4 2xl:right-10 top-1/3 z-20 flex-col items-center gap-4 animate-edge-float-2 pointer-events-none'>
+          <FloatingHeadphones />
+          <EdgeSparkle size={18} />
+          <FloatingMusicNote type="single" />
+        </div>
       </section>
 
-      {/* 1.5. Video Section */}
-      <section className='relative py-24 md:py-32 overflow-hidden bg-[#0a0b10] flex flex-col items-center border-t border-white/5'>
-        {/* Glow */}
-        <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[color:var(--color-accent-gold)] opacity-[0.05] blur-[120px] rounded-full z-0 pointer-events-none'></div>
+      {/* 2. Video Section (HIGH VISUAL FOCUS) */}
+      <section className='relative py-24 md:py-32 overflow-hidden bg-[#0a0b10]/40 backdrop-blur-sm flex flex-col items-center border-t border-white/5'>
+        {/* Dynamic Concert Stage Laser Beams & Cinema Atmosphere */}
+        <StageLaserBeams />
+        <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[450px] bg-[radial-gradient(ellipse_at_center,rgba(194,167,90,0.15)_0%,transparent_70%)] blur-[120px] rounded-full z-0 pointer-events-none'></div>
         
         <div className='container relative z-10 flex flex-col items-center text-center'>
           
@@ -258,13 +297,20 @@ function Home() {
             </p>
           </motion.div>
 
+          {/* Kinematografski okvir s fokusom na video */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
-            className='w-full max-w-5xl rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10 relative z-20 bg-black/50'
+            className='w-full max-w-5xl rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_25px_60px_rgba(0,0,0,0.8),0_0_40px_rgba(194,167,90,0.15)] border border-white/20 relative z-20 bg-black'
           >
+            {/* Live oznaka u kutu videa */}
+            <div className='absolute top-4 left-4 z-30 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/70 backdrop-blur-md border border-white/15 text-white text-xs font-semibold tracking-wider uppercase'>
+              <span className='w-2 h-2 rounded-full bg-red-500 animate-ping'></span>
+              <span>Uživo s podija</span>
+            </div>
+
             <video 
               src={eventsVideo} 
               autoPlay 
@@ -295,12 +341,15 @@ function Home() {
         </div>
       </section>
 
+      {/* 3. Usluge Section */}
+      <section className='home-services-section relative py-24 md:py-40 overflow-hidden bg-[#0a0b10]/40 backdrop-blur-sm border-t border-white/5'>
+        {/* Dynamic Stage Lighting & Glow */}
+        <div className='absolute -bottom-24 left-10 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(194,167,90,0.14)_0%,transparent_70%)] blur-[130px] rounded-full z-0 pointer-events-none animate-ambient-drift-1'></div>
+        <div className='absolute top-20 right-10 w-[550px] h-[550px] bg-[radial-gradient(circle,rgba(255,223,115,0.12)_0%,transparent_70%)] blur-[120px] rounded-full z-0 pointer-events-none animate-ambient-drift-2'></div>
+        <div className='absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.03)_1px,transparent_1px)] [background-size:32px_32px] pointer-events-none z-0'></div>
 
-
-      {/* 3. Usluge Section (MOVED UP) */}
-      <section className='home-services-section relative py-24 md:py-40 overflow-hidden bg-[#0a0b10] border-t border-white/5'>
-        {/* Glow */}
-        <div className='absolute bottom-0 left-0 w-[600px] h-[600px] bg-[color:var(--color-accent-gold)] opacity-[0.05] blur-[150px] rounded-full z-0 pointer-events-none'></div>
+        {/* Dynamic Digital Audio Frequency Waveform */}
+        <AudioFrequencyWaveform />
 
         <div className="container relative z-10">
           <div className='mb-16 md:mb-24 text-center flex flex-col items-center'>
@@ -357,9 +406,103 @@ function Home() {
         </div>
       </section>
 
-      {/* 2. Intro Hook Section (Restored) */}
-      <section className='home-landing-section relative overflow-hidden py-32 md:py-48'>
-        <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] md:w-[800px] h-[400px] bg-[color:var(--color-accent-gold)] opacity-[0.08] blur-[120px] rounded-full z-0 pointer-events-none'></div>
+      {/* 4. Google Reviews Section (MOVED HERE BEFORE INTRO HOOK) */}
+      <section className='relative py-24 md:py-32 overflow-hidden bg-[#0a0b10]/40 backdrop-blur-sm border-t border-white/5'>
+        {/* Dynamic Golden Atmosphere & Pulse */}
+        <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[600px] bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.14)_0%,rgba(99,102,241,0.06)_45%,transparent_75%)] blur-[140px] rounded-full z-0 pointer-events-none animate-ambient-pulse'></div>
+        <div className='absolute inset-0 bg-[radial-gradient(rgba(194,167,90,0.05)_1px,transparent_1px)] [background-size:28px_28px] pointer-events-none z-0'></div>
+
+        {/* In-section floating edge DJ elements */}
+        <div className='hidden xl:flex absolute left-4 2xl:left-10 top-1/2 -translate-y-1/2 z-20 flex-col items-center gap-4 animate-edge-float-1 pointer-events-none'>
+          <EdgeVuMeter label="CH 1" channel={1} />
+          <FloatingMusicNote type="beam" />
+        </div>
+        <div className='hidden xl:flex absolute right-0 top-1/2 -translate-y-1/2 z-20 flex-col items-end animate-edge-float-2 pointer-events-none'>
+          <VinylEdgePeeker side="right" />
+          <EdgeSparkle size={18} className="mr-4 mt-2" />
+        </div>
+        
+        <div className='container relative z-10'>
+          <div className='text-center mb-16 md:mb-20 flex flex-col items-center'>
+            <h4 className='text-[color:var(--color-accent-gold)] font-medium tracking-[0.2em] uppercase text-xs md:text-sm mb-6 flex items-center justify-center gap-4'>
+              <span className='w-12 h-px bg-[color:var(--color-accent-gold)]'></span>
+              Recenzije
+              <span className='w-12 h-px bg-[color:var(--color-accent-gold)]'></span>
+            </h4>
+            <div className='flex items-center justify-center gap-4 mb-4'>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" className="w-10 h-10 md:w-12 md:h-12 shrink-0">
+                <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+                <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+                <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+              </svg>
+              <h3 className='text-4xl md:text-5xl font-bold tracking-wide text-white m-0'>
+                Što kažu klijenti?
+              </h3>
+            </div>
+            
+            <div className='flex items-center justify-center gap-3 mb-2 mt-2'>
+              <div className='flex gap-1 text-[#fbbc04] text-2xl'>
+                {[...Array(5)].map((_, idx) => (
+                  <FontAwesomeIcon key={idx} icon={faStar} />
+                ))}
+              </div>
+              <span className='text-white font-bold text-xl'>5.0</span>
+            </div>
+            
+            <p className='text-gray-400 font-light text-sm md:text-base mt-2'>
+              Recenzije preuzete s Google Maps
+            </p>
+          </div>
+
+          <div className='grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto'>
+            {displayedReviews.map((review, i) => (
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: i * 0.2, ease: "easeOut" }}
+                className='bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-md shadow-[0_20px_40px_rgba(0,0,0,0.3)] flex flex-col transition-all duration-500 hover:-translate-y-2 hover:bg-white/10 hover:border-white/20 hover:shadow-[0_30px_60px_rgba(0,0,0,0.6)] cursor-default'
+              >
+                <div className='flex items-center gap-4 mb-6'>
+                  <div className='w-14 h-14 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center text-xl font-semibold text-white border border-white/10 shrink-0'>
+                    {review.author.charAt(0)}
+                  </div>
+                  <div>
+                    <h4 className='text-white font-medium'>{review.author}</h4>
+                    <p className='text-gray-400 text-sm'>{getTimeAgo(review.date)}</p>
+                  </div>
+                </div>
+                
+                <div className='flex gap-1 text-[#fbbc04] mb-8 text-sm'>
+                  {[...Array(5)].map((_, idx) => (
+                    <FontAwesomeIcon key={idx} icon={faStar} />
+                  ))}
+                </div>
+                
+                <p className='text-gray-300 font-light leading-relaxed italic relative'>
+                  <span className='text-4xl text-white/10 font-serif absolute -top-4 -left-2'>"</span>
+                  <span className='relative z-10'>{review.text}</span>
+                </p>
+              </motion.div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* 5. Intro Hook Section - Ključna stvar za stvaranje dobre glazbe (DODANA DINAMIKA I ANIMACIJE) */}
+      <section className='home-landing-section relative overflow-hidden py-32 md:py-48 border-t border-white/5'>
+        {/* Glow */}
+        <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] md:w-[900px] h-[500px] bg-[color:var(--color-accent-gold)] opacity-[0.12] blur-[130px] rounded-full z-0 pointer-events-none'></div>
+
+        {/* Dynamic Acoustic Vinyl Ripples */}
+        <div className='absolute top-1/2 left-1/2 w-[750px] h-[750px] pointer-events-none z-0'>
+          <div className='absolute top-1/2 left-1/2 w-[320px] h-[320px] rounded-full border border-[color:var(--color-accent-gold)]/30 animate-vinyl-ripple-1'></div>
+          <div className='absolute top-1/2 left-1/2 w-[500px] h-[500px] rounded-full border border-[color:var(--color-accent-gold)]/20 animate-vinyl-ripple-2'></div>
+          <div className='absolute top-1/2 left-1/2 w-[680px] h-[680px] rounded-full border border-[color:var(--color-accent-gold)]/15 animate-vinyl-ripple-3'></div>
+        </div>
 
         <div className='container relative z-10'>
           <motion.div
@@ -369,12 +512,21 @@ function Home() {
             transition={{ duration: 1, ease: "easeOut" }}
             className='max-w-4xl mx-auto text-center relative'
           >
+            {/* Dynamic Equalizer Visualizer Bars */}
+            <div className='flex items-end justify-center gap-1.5 mb-8 h-8'>
+              <span className='w-1.5 bg-gradient-to-t from-[color:var(--color-accent-gold)] to-[#ffdf73] rounded-full h-8 animate-eq-1'></span>
+              <span className='w-1.5 bg-gradient-to-t from-[color:var(--color-accent-gold)] to-[#ffdf73] rounded-full h-5 animate-eq-2'></span>
+              <span className='w-1.5 bg-gradient-to-t from-[color:var(--color-accent-gold)] to-[#ffdf73] rounded-full h-7 animate-eq-3'></span>
+              <span className='w-1.5 bg-gradient-to-t from-[color:var(--color-accent-gold)] to-[#ffdf73] rounded-full h-4 animate-eq-4'></span>
+              <span className='w-1.5 bg-gradient-to-t from-[color:var(--color-accent-gold)] to-[#ffdf73] rounded-full h-6 animate-eq-5'></span>
+            </div>
+
             {/* Elegant large quote icon */}
-            <div className='text-[color:var(--color-accent-gold)] opacity-20 text-8xl md:text-[12rem] font-serif absolute -top-16 md:-top-32 left-1/2 -translate-x-1/2 -z-10 select-none'>
+            <div className='text-[color:var(--color-accent-gold)] opacity-30 text-8xl md:text-[12rem] font-serif absolute -top-16 md:-top-32 left-1/2 -translate-x-1/2 -z-10 select-none animate-pulse'>
               "
             </div>
 
-            <h2 className='text-3xl md:text-5xl lg:text-6xl font-light tracking-wide text-white leading-tight mb-8 drop-shadow-lg'>
+            <h2 className='text-3xl md:text-5xl lg:text-6xl font-light tracking-wide text-white leading-tight mb-8 drop-shadow-2xl'>
               Ključna stvar za stvaranje dobre zabave je <span className='italic font-medium bg-clip-text text-transparent bg-gradient-to-r from-[color:var(--color-accent-gold)] to-[#ffdf73]'>glazba</span>,
               <br className="hidden md:block" />
               <span className='block mt-4 text-2xl md:text-4xl text-gray-200'>uz naše DJ-eve to više nije problem.</span>
@@ -382,16 +534,22 @@ function Home() {
 
             <div className='w-24 h-px bg-gradient-to-r from-transparent via-[color:var(--color-accent-gold)] to-transparent mx-auto mb-8 opacity-70'></div>
 
-            <p className='text-gray-400 text-lg md:text-xl font-light max-w-2xl mx-auto leading-relaxed'>
+            <p className='text-gray-300 text-lg md:text-xl font-light max-w-2xl mx-auto leading-relaxed'>
               Uz <strong className='text-white font-medium'>DJ Proslave</strong>, uživat ćete u glazbenim trenucima koji će oduševiti Vas i vaše goste. Dopustite nam da vaše želje pretvorimo u stvarnost.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* 5. O Nama Section */}
-      <section className='relative py-24 md:py-40 overflow-hidden bg-[#0a0b10] border-b border-white/5'>
-        <div className='absolute top-0 right-0 w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-[color:var(--color-accent-gold)] opacity-[0.06] blur-[100px] md:blur-[150px] rounded-full z-0 pointer-events-none'></div>
+      {/* 6. O Nama Section */}
+      <section className='relative py-24 md:py-40 overflow-hidden bg-[#0a0b10]/40 backdrop-blur-sm border-t border-b border-white/5'>
+        {/* Dynamic Stage Glow & Ambient Grid */}
+        <div className='absolute top-0 right-0 w-[550px] md:w-[750px] h-[550px] md:h-[750px] bg-[radial-gradient(circle,rgba(194,167,90,0.14)_0%,transparent_70%)] blur-[130px] rounded-full z-0 pointer-events-none animate-ambient-drift-1'></div>
+        <div className='absolute bottom-0 left-0 w-[450px] h-[450px] bg-[radial-gradient(circle,rgba(99,102,241,0.09)_0%,transparent_70%)] blur-[110px] rounded-full z-0 pointer-events-none animate-ambient-drift-2'></div>
+        <div className='absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.025)_1px,transparent_1px)] [background-size:36px_36px] pointer-events-none z-0'></div>
+
+        {/* Dynamic Sweeping Stage Spotlight & Studio Grid */}
+        <StageSpotlightSweep />
 
         <div className="container relative z-10">
           <div className='flex flex-col lg:flex-row justify-between items-center gap-16 lg:gap-24'>
@@ -467,84 +625,11 @@ function Home() {
         </div>
       </section>
 
-      {/* 6. Google Reviews Section */}
-      <section className='relative py-24 md:py-32 overflow-hidden bg-[#0a0b10] border-t border-white/5'>
-        <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[color:var(--color-accent-gold)] opacity-[0.03] blur-[150px] rounded-full z-0 pointer-events-none'></div>
-        
-        <div className='container relative z-10'>
-          <div className='text-center mb-16 md:mb-20 flex flex-col items-center'>
-            <h4 className='text-[color:var(--color-accent-gold)] font-medium tracking-[0.2em] uppercase text-xs md:text-sm mb-6 flex items-center justify-center gap-4'>
-              <span className='w-12 h-px bg-[color:var(--color-accent-gold)]'></span>
-              Recenzije
-              <span className='w-12 h-px bg-[color:var(--color-accent-gold)]'></span>
-            </h4>
-            <div className='flex items-center justify-center gap-4 mb-4'>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" className="w-10 h-10 md:w-12 md:h-12 shrink-0">
-                <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
-                <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
-                <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
-                <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
-              </svg>
-              <h3 className='text-4xl md:text-5xl font-bold tracking-wide text-white m-0'>
-                Što kažu klijenti?
-              </h3>
-            </div>
-            
-            <div className='flex items-center justify-center gap-3 mb-2 mt-2'>
-              <div className='flex gap-1 text-[#fbbc04] text-2xl'>
-                {[...Array(5)].map((_, idx) => (
-                  <FontAwesomeIcon key={idx} icon={faStar} />
-                ))}
-              </div>
-              <span className='text-white font-bold text-xl'>5.0</span>
-            </div>
-            
-            <p className='text-gray-400 font-light text-sm md:text-base mt-2'>
-              Recenzije preuzete s Google Maps
-            </p>
-          </div>
-
-          <div className='grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto'>
-            {displayedReviews.map((review, i) => (
-              <motion.div 
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.2, ease: "easeOut" }}
-                className='bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-md shadow-[0_20px_40px_rgba(0,0,0,0.3)] flex flex-col transition-all duration-500 hover:-translate-y-2 hover:bg-white/10 hover:border-white/20 hover:shadow-[0_30px_60px_rgba(0,0,0,0.6)] cursor-default'
-              >
-                <div className='flex items-center gap-4 mb-6'>
-                  <div className='w-14 h-14 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center text-xl font-semibold text-white border border-white/10 shrink-0'>
-                    {review.author.charAt(0)}
-                  </div>
-                  <div>
-                    <h4 className='text-white font-medium'>{review.author}</h4>
-                    <p className='text-gray-400 text-sm'>{getTimeAgo(review.date)}</p>
-                  </div>
-                </div>
-                
-                <div className='flex gap-1 text-[#fbbc04] mb-8 text-sm'>
-                  {[...Array(5)].map((_, idx) => (
-                    <FontAwesomeIcon key={idx} icon={faStar} />
-                  ))}
-                </div>
-                
-                <p className='text-gray-300 font-light leading-relaxed italic relative'>
-                  <span className='text-4xl text-white/10 font-serif absolute -top-4 -left-2'>"</span>
-                  <span className='relative z-10'>{review.text}</span>
-                </p>
-              </motion.div>
-            ))}
-          </div>
-
-        </div>
-      </section>
-
-      {/* 7. NOVO: Call to Action sekcija */}
-      <section className='relative py-24 md:py-32 overflow-hidden bg-[#0a0b10] border-t border-white/5'>
-        <div className='absolute inset-0 bg-gradient-to-t from-[color:var(--color-accent-gold)]/10 via-transparent to-transparent pointer-events-none'></div>
-        <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[300px] bg-[color:var(--color-accent-gold)] opacity-[0.1] blur-[100px] rounded-full z-0 pointer-events-none'></div>
+      {/* 7. Call to Action sekcija (ZADNJE) */}
+      <section className='relative py-24 md:py-32 overflow-hidden bg-[#0a0b10]/40 backdrop-blur-sm border-t border-white/5'>
+        {/* Climax Celebration Energy Aura & Pyro Sparkles */}
+        <CelebrationPartySparkles />
+        <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[450px] bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.18)_0%,rgba(255,223,115,0.08)_50%,transparent_75%)] blur-[130px] rounded-full z-0 pointer-events-none animate-ambient-pulse'></div>
 
         <div className='container relative z-10'>
           <div className='max-w-4xl mx-auto rounded-[2.5rem] p-8 md:p-16 border border-[color:var(--color-accent-gold)]/20 bg-gradient-to-b from-white/5 to-transparent backdrop-blur-xl shadow-[0_30px_60px_rgba(0,0,0,0.5)] text-center relative overflow-hidden group'>
