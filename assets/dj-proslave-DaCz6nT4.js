@@ -1,1 +1,0 @@
-var e=`/dj-proslave/assets/dj-proslave-MhEv8pss.webp`;export{e as t};
