@@ -235,10 +235,13 @@ export function StageLaserBeams({ className = "" }: { className?: string }) {
  */
 export function AudioFrequencyWaveform({ className = "" }: { className?: string }) {
   return (
-    <div className={`absolute inset-x-0 bottom-0 h-40 md:h-60 overflow-hidden pointer-events-none z-0 select-none ${className}`}>
-      {/* Subtle top fade mask so content sits cleanly */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0a0b10]/80 via-transparent to-transparent z-10" />
-
+    <div 
+      className={`absolute inset-x-0 bottom-0 h-40 md:h-60 overflow-hidden pointer-events-none z-0 select-none ${className}`}
+      style={{
+        maskImage: 'linear-gradient(to bottom, transparent 0%, black 30%, black 100%)',
+        WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 30%, black 100%)'
+      }}
+    >
       <svg 
         className="w-[1800px] h-full absolute bottom-0 left-1/2 -translate-x-1/2 opacity-70" 
         viewBox="0 0 1800 240" 

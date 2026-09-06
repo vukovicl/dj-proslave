@@ -70,8 +70,8 @@ function Contact() {
   const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = event.target;
     setUserContactData(prevState => ({
-        ...prevState,
-        [name]: value
+      ...prevState,
+      [name]: value
     }));
   };
 
@@ -136,7 +136,7 @@ function Contact() {
 
     try {
       emailjs.send(
-        import.meta.env.VITE_EMAIL_SERVICE_ID!, 
+        import.meta.env.VITE_EMAIL_SERVICE_ID!,
         import.meta.env.VITE_EMAIL_TEMPLATE_ID!,
         {
           fullName: userContactData.fullName,
@@ -179,7 +179,7 @@ function Contact() {
     let numberOfGuests = validateField(userContactData.numberOfGuests, 'numberOfGuests', { required: true });
     let howDidYouHear = validateField(userContactData.howDidYouHear, 'howDidYouHear', { required: true });
     let additonalNotice = validateField(userContactData.additonalNotice, 'additonalNotice', { max: 1000 });
-    
+
     if (fullName && phone && email && date && eventType && location && numberOfGuests && howDidYouHear && additonalNotice) {
       return true;
     }
@@ -204,7 +204,7 @@ function Contact() {
     if (validate.required && !data) {
       validationMessage = 'Polje je obavezno';
     }
-    
+
     setUserContactDataValidation(prevState => ({
       ...prevState,
       [name]: validationMessage
@@ -228,7 +228,7 @@ function Contact() {
   function toggleFaq(index: number) {
     setActiveFaq(activeFaq === index ? null : index);
   }
-  
+
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -243,19 +243,19 @@ function Contact() {
   };
 
   return (
-    <div className="bg-[#050508]/40 backdrop-blur-sm min-h-screen pb-20 md:pb-32">
-      <script 
-        type="application/ld+json" 
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([structuredData, faqSchema]) }} 
+    <div className="bg-[#050508]/40 backdrop-blur-sm min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([structuredData, faqSchema]) }}
       />
-      
+
       {/* 1. HERO BANNER & CONTACT MODUL (Prema korisničkom predlošku) */}
       <section className='contact-form relative pt-28 md:pt-40 container mx-auto px-4'>
         <div className="absolute rounded-full blur-[120px] opacity-15 pointer-events-none animate-float w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-[radial-gradient(circle,var(--color-accent-gold),transparent)] top-[-50px] left-[-50px] md:left-[-100px] [animation-delay:0s]"></div>
         <div className="absolute rounded-full blur-[120px] opacity-15 pointer-events-none animate-float w-[250px] md:w-[500px] h-[250px] md:h-[500px] bg-[radial-gradient(circle,#ffdf73,transparent)] bottom-[-150px] right-[-50px] md:right-[-150px] [animation-delay:5s]"></div>
         <div className="absolute rounded-full blur-[120px] opacity-15 pointer-events-none animate-float w-[200px] md:w-[400px] h-[200px] md:h-[400px] bg-[radial-gradient(circle,var(--color-accent-gold),transparent)] top-[50%] right-[10%] [animation-delay:10s]"></div>
         <div className="absolute rounded-full blur-[120px] opacity-15 pointer-events-none animate-float w-[200px] md:w-[400px] h-[200px] md:h-[400px] bg-[radial-gradient(circle,#ffdf73,transparent)] top-[50%] left-[0] [animation-delay:10s]"></div>
-        
+
         {/* In-section floating edge DJ elements */}
         <div className='hidden xl:flex absolute -left-16 2xl:-left-20 top-1/4 z-20 flex-col items-center gap-4 animate-edge-float-1 pointer-events-none'>
           <FloatingEdgeVinyl size={56} />
@@ -266,7 +266,7 @@ function Contact() {
           <EdgeVuMeter label="INBOX" channel={1} />
           <EdgeSparkle size={18} />
         </div>
-        
+
         <header>
           <div className="relative text-center pt-8 pb-12 md:pb-24">
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[150px] md:w-[200px] h-[2px] bg-gradient-to-r from-transparent via-[color:var(--color-accent-gold)] to-transparent"></div>
@@ -278,7 +278,7 @@ function Contact() {
             </p>
           </div>
         </header>
-        
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start relative z-10 mb-20">
           <div className="space-y-10 md:space-y-12">
             <div>
@@ -349,7 +349,7 @@ function Contact() {
 
           <div className="relative w-full">
             <div className="absolute -inset-1 bg-gradient-to-r from-[color:var(--color-accent-gold)]/20 to-[color:var(--color-accent-gold)]/20 rounded-[2rem] blur-xl opacity-50 pointer-events-none"></div>
-            
+
             <div className="relative bg-white/5 border border-white/10 p-6 sm:p-10 rounded-[2rem] shadow-2xl backdrop-blur-xl">
               <div className="mb-6 md:mb-10 text-center">
                 <h2 className="text-2xl md:text-4xl font-light text-white mb-2">
@@ -362,77 +362,77 @@ function Contact() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
                   <div className="space-y-2">
                     <label htmlFor="fullName" className="text-xs uppercase tracking-widest text-gray-500 font-semibold">Ime i Prezime <span className="text-[rgba(212,175,55,1)]">*</span></label>
-                    <input 
-                      type="text" 
-                      id="fullName" 
-                      name="fullName" 
+                    <input
+                      type="text"
+                      id="fullName"
+                      name="fullName"
                       value={userContactData.fullName}
                       onChange={handleChange}
-                      placeholder="Vaše ime i prezime..." 
+                      placeholder="Vaše ime i prezime..."
                       className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm md:text-base text-white placeholder-gray-600 focus:outline-none focus:border-[rgba(212,175,55,1)] focus:ring-1 focus:ring-[rgba(212,175,55,1)] transition-all duration-300"
                     />
-                    { userContactDataValidation.fullName && <p className='text-red-400 text-xs m-0 font-medium'>{userContactDataValidation.fullName}</p> }
+                    {userContactDataValidation.fullName && <p className='text-red-400 text-xs m-0 font-medium'>{userContactDataValidation.fullName}</p>}
                   </div>
 
                   <div className="space-y-2">
                     <label htmlFor="email" className="text-xs uppercase tracking-widest text-gray-500 font-semibold">Email adresa <span className="text-[rgba(212,175,55,1)]">*</span></label>
-                    <input 
-                      type="email" 
-                      id="email" 
-                      name="email" 
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
                       value={userContactData.email}
                       onChange={handleChange}
-                      placeholder="Vaš email..." 
+                      placeholder="Vaš email..."
                       className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm md:text-base text-white placeholder-gray-600 focus:outline-none focus:border-[rgba(212,175,55,1)] focus:ring-1 focus:ring-[rgba(212,175,55,1)] transition-all duration-300"
                     />
-                    { userContactDataValidation.email && <p className='text-red-400 text-xs m-0 font-medium'>{userContactDataValidation.email}</p> }
+                    {userContactDataValidation.email && <p className='text-red-400 text-xs m-0 font-medium'>{userContactDataValidation.email}</p>}
                   </div>
 
                   <div className="space-y-2">
                     <label htmlFor="date" className="text-xs uppercase tracking-widest text-gray-500 font-semibold">Željeni datum <span className="text-[rgba(212,175,55,1)]">*</span></label>
-                    <input 
-                      type="date" 
-                      id="date" 
-                      name="date" 
+                    <input
+                      type="date"
+                      id="date"
+                      name="date"
                       lang="hr-HR"
                       min={new Date().toISOString().split('T')[0]}
                       value={userContactData.date}
                       onChange={handleChange}
                       className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm md:text-base text-white placeholder-gray-600 focus:outline-none focus:border-[rgba(212,175,55,1)] focus:ring-1 focus:ring-[rgba(212,175,55,1)] transition-all duration-300 [color-scheme:dark]"
                     />
-                    { userContactDataValidation.date && <p className='text-red-400 text-xs m-0 font-medium'>{userContactDataValidation.date}</p> }
+                    {userContactDataValidation.date && <p className='text-red-400 text-xs m-0 font-medium'>{userContactDataValidation.date}</p>}
                   </div>
 
                   <div className="space-y-2">
                     <label htmlFor="phone" className="text-xs uppercase tracking-widest text-gray-500 font-semibold">Broj Mobitela <span className="text-[rgba(212,175,55,1)]">*</span></label>
-                    <input 
-                      type="tel" 
-                      id="phone" 
-                      name="phone" 
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
                       value={userContactData.phone}
                       onChange={handleChange}
-                      placeholder="Vaš broj mobitela..." 
+                      placeholder="Vaš broj mobitela..."
                       className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm md:text-base text-white placeholder-gray-600 focus:outline-none focus:border-[rgba(212,175,55,1)] focus:ring-1 focus:ring-[rgba(212,175,55,1)] transition-all duration-300"
                     />
-                    { userContactDataValidation.phone && <p className='text-red-400 text-xs m-0 font-medium'>{userContactDataValidation.phone}</p> }
+                    {userContactDataValidation.phone && <p className='text-red-400 text-xs m-0 font-medium'>{userContactDataValidation.phone}</p>}
                   </div>
-                  
+
                   <div className="space-y-2 md:col-span-2">
                     <label htmlFor="eventType" className="text-xs uppercase tracking-widest text-gray-500 font-semibold">Vrsta događaja <span className="text-[rgba(212,175,55,1)]">*</span></label>
                     <div className="relative" ref={eventTypeRef}>
-                      <div 
+                      <div
                         className={`w-full bg-white/5 border rounded-lg px-4 py-3 text-sm md:text-base flex justify-between items-center cursor-pointer transition-all duration-300 ${isEventTypeOpen ? 'border-[rgba(212,175,55,1)] ring-1 ring-[rgba(212,175,55,1)]' : 'border-white/10 hover:border-white/20'}`}
                         onClick={() => setIsEventTypeOpen(!isEventTypeOpen)}
                       >
                         <span className={userContactData.eventType ? 'text-white' : 'text-gray-500'}>
                           {userContactData.eventType || 'Odaberite vrstu događaja...'}
                         </span>
-                        <FontAwesomeIcon 
-                          icon={faChevronDown} 
-                          className={`text-gray-400 text-sm transition-transform duration-300 ${isEventTypeOpen ? 'rotate-180' : ''}`} 
+                        <FontAwesomeIcon
+                          icon={faChevronDown}
+                          className={`text-gray-400 text-sm transition-transform duration-300 ${isEventTypeOpen ? 'rotate-180' : ''}`}
                         />
                       </div>
-                      
+
                       <AnimatePresence>
                         {isEventTypeOpen && (
                           <motion.div
@@ -458,53 +458,53 @@ function Contact() {
                         )}
                       </AnimatePresence>
                     </div>
-                    { userContactDataValidation.eventType && <p className='text-red-400 text-xs m-0 font-medium'>{userContactDataValidation.eventType}</p> }
+                    {userContactDataValidation.eventType && <p className='text-red-400 text-xs m-0 font-medium'>{userContactDataValidation.eventType}</p>}
                   </div>
 
                   <div className="space-y-2 md:col-span-2">
                     <label htmlFor="location" className="text-xs uppercase tracking-widest text-gray-500 font-semibold">Lokacija <span className="text-[rgba(212,175,55,1)]">*</span></label>
-                    <input 
-                      type="text" 
-                      id="location" 
-                      name="location" 
+                    <input
+                      type="text"
+                      id="location"
+                      name="location"
                       value={userContactData.location}
                       onChange={handleChange}
-                      placeholder="Grad, mjesto ili naziv lokacije..." 
+                      placeholder="Grad, mjesto ili naziv lokacije..."
                       className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm md:text-base text-white placeholder-gray-600 focus:outline-none focus:border-[rgba(212,175,55,1)] focus:ring-1 focus:ring-[rgba(212,175,55,1)] transition-all duration-300"
                     />
-                    { userContactDataValidation.location && <p className='text-red-400 text-xs m-0 font-medium'>{userContactDataValidation.location}</p> }
+                    {userContactDataValidation.location && <p className='text-red-400 text-xs m-0 font-medium'>{userContactDataValidation.location}</p>}
                   </div>
-                  
+
                   <div className="space-y-2">
                     <label htmlFor="numberOfGuests" className="text-xs uppercase tracking-widest text-gray-500 font-semibold">Broj gostiju <span className="text-[rgba(212,175,55,1)]">*</span></label>
-                    <input 
-                      type="text" 
-                      id="numberOfGuests" 
-                      name="numberOfGuests" 
+                    <input
+                      type="text"
+                      id="numberOfGuests"
+                      name="numberOfGuests"
                       value={userContactData.numberOfGuests}
                       onChange={handleChange}
-                      placeholder="Npr. oko 100, 50-100..." 
+                      placeholder="Npr. oko 100, 50-100..."
                       className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm md:text-base text-white placeholder-gray-600 focus:outline-none focus:border-[rgba(212,175,55,1)] focus:ring-1 focus:ring-[rgba(212,175,55,1)] transition-all duration-300"
                     />
-                    { userContactDataValidation.numberOfGuests && <p className='text-red-400 text-xs m-0 font-medium'>{userContactDataValidation.numberOfGuests}</p> }
+                    {userContactDataValidation.numberOfGuests && <p className='text-red-400 text-xs m-0 font-medium'>{userContactDataValidation.numberOfGuests}</p>}
                   </div>
 
                   <div className="space-y-2">
                     <label htmlFor="howDidYouHear" className="text-xs uppercase tracking-widest text-gray-500 font-semibold">Kako ste čuli za nas? <span className="text-[rgba(212,175,55,1)]">*</span></label>
                     <div className="relative" ref={howDidYouHearRef}>
-                      <div 
+                      <div
                         className={`w-full bg-white/5 border rounded-lg px-4 py-3 text-sm md:text-base flex justify-between items-center cursor-pointer transition-all duration-300 ${isHowDidYouHearOpen ? 'border-[rgba(212,175,55,1)] ring-1 ring-[rgba(212,175,55,1)]' : 'border-white/10 hover:border-white/20'}`}
                         onClick={() => setIsHowDidYouHearOpen(!isHowDidYouHearOpen)}
                       >
                         <span className={userContactData.howDidYouHear ? 'text-white' : 'text-gray-500'}>
                           {userContactData.howDidYouHear || 'Odaberite opciju...'}
                         </span>
-                        <FontAwesomeIcon 
-                          icon={faChevronDown} 
-                          className={`text-gray-400 text-sm transition-transform duration-300 ${isHowDidYouHearOpen ? 'rotate-180' : ''}`} 
+                        <FontAwesomeIcon
+                          icon={faChevronDown}
+                          className={`text-gray-400 text-sm transition-transform duration-300 ${isHowDidYouHearOpen ? 'rotate-180' : ''}`}
                         />
                       </div>
-                      
+
                       <AnimatePresence>
                         {isHowDidYouHearOpen && (
                           <motion.div
@@ -530,26 +530,26 @@ function Contact() {
                         )}
                       </AnimatePresence>
                     </div>
-                    { userContactDataValidation.howDidYouHear && <p className='text-red-400 text-xs m-0 font-medium'>{userContactDataValidation.howDidYouHear}</p> }
+                    {userContactDataValidation.howDidYouHear && <p className='text-red-400 text-xs m-0 font-medium'>{userContactDataValidation.howDidYouHear}</p>}
                   </div>
 
                   <div className="space-y-2 md:col-span-2">
                     <label htmlFor="additionalNotice" className="text-xs uppercase tracking-widest text-gray-500 font-semibold">Dodatan opis</label>
-                    <textarea 
-                      id="additionalNotice" 
-                      name="additionalNotice" 
+                    <textarea
+                      id="additionalNotice"
+                      name="additionalNotice"
                       value={userContactData.additonalNotice}
                       onChange={handleChangeTextArea}
-                      placeholder="Vaša očekivanja, posebne želje ili bilo kakve dodatne informacije..." 
+                      placeholder="Vaša očekivanja, posebne želje ili bilo kakve dodatne informacije..."
                       rows={4}
                       className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm md:text-base text-white placeholder-gray-600 focus:outline-none focus:border-[rgba(212,175,55,1)] focus:ring-1 focus:ring-[rgba(212,175,55,1)] transition-all duration-300 resize-none"
                     ></textarea>
-                    { userContactDataValidation.additonalNotice && <p className='text-red-400 text-xs m-0 font-medium'>{userContactDataValidation.additonalNotice}</p> }
+                    {userContactDataValidation.additonalNotice && <p className='text-red-400 text-xs m-0 font-medium'>{userContactDataValidation.additonalNotice}</p>}
                   </div>
                 </div>
 
-                <button 
-                  type="button" 
+                <button
+                  type="button"
                   onClick={() => submitForm()}
                   className="w-full py-4 mt-2 font-extrabold tracking-[0.1em] text-sm md:text-base inline-flex justify-center items-center bg-gradient-to-r from-[color:var(--color-accent-gold)] to-[#ffdf73] text-black rounded-xl hover:scale-[1.02] transition-transform duration-300 uppercase shadow-[0_0_20px_rgba(212,175,55,0.3)]"
                 >
@@ -583,7 +583,7 @@ function Contact() {
         <AudioFrequencyWaveform className="opacity-35" />
         <div className="mt-20 md:mt-32 max-w-4xl mx-auto relative px-4 z-10">
           <div className="absolute rounded-full blur-[120px] opacity-15 pointer-events-none animate-float w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-[radial-gradient(circle,var(--color-accent-gold),transparent)] top-[-150px] left-[-200px] [animation-delay:0s]"></div>
-          
+
           <header className="mx-auto max-w-2xl text-center mb-12 md:mb-20">
             <h2 className="text-3xl md:text-5xl font-light tracking-wide text-white mb-6">
               Često postavljana <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[color:var(--color-accent-gold)] to-[#ffdf73]">pitanja</span>
@@ -591,15 +591,15 @@ function Contact() {
             <p className="mx-auto mt-4 md:mt-5 max-w-xl text-lg font-light leading-relaxed text-gray-400">
               Brzi odgovori na pitanja koja najčešće dobivamo. Ukoliko ne pronalazite odgovor, obratite nam se putem gornjeg obrasca.
             </p>
-          </header> 
+          </header>
 
           <div className="space-y-3 md:space-y-4">
             {faq.map((item, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl overflow-hidden transition-all duration-300 hover:bg-white/10"
               >
-                <button 
+                <button
                   onClick={() => toggleFaq(index)}
                   className="w-full px-5 py-4 md:px-6 md:py-5 flex justify-between items-center text-left focus:outline-none group"
                   aria-expanded={activeFaq === index}
@@ -613,8 +613,8 @@ function Contact() {
                     </svg>
                   </div>
                 </button>
-                
-                <div 
+
+                <div
                   className={`px-5 md:px-6 overflow-hidden transition-all duration-500 ease-in-out ${activeFaq === index ? 'max-h-96 pb-5 md:pb-6 opacity-100' : 'max-h-0 opacity-0'}`}
                 >
                   <div className="pt-4 border-t border-white/5 text-sm md:text-base text-gray-400 leading-relaxed font-light" dangerouslySetInnerHTML={{ __html: item.answer }}></div>
@@ -624,7 +624,7 @@ function Contact() {
           </div>
         </div>
       </section>
-      
+
     </div>
   );
 }

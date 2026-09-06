@@ -97,7 +97,7 @@ const allServicesData = [
 const getTimeAgo = (date: Date) => {
   const now = new Date();
   const diffInMonths = (now.getFullYear() - date.getFullYear()) * 12 + now.getMonth() - date.getMonth();
-  
+
   if (diffInMonths <= 0) {
     const diffInDays = Math.floor((now.getTime() - date.getTime()) / (1000 * 3600 * 24));
     if (diffInDays < 7) return 'prije nekoliko dana';
@@ -156,7 +156,7 @@ function Home() {
   useEffect(() => {
     const shuffledReviews = [...reviewsData].sort(() => 0.5 - Math.random());
     setDisplayedReviews(shuffledReviews.slice(0, 3));
-    
+
     const shuffledServices = [...allServicesData].sort(() => 0.5 - Math.random());
     setDisplayedServices(shuffledServices.slice(0, 3));
   }, []);
@@ -171,9 +171,9 @@ function Home() {
 
   return (
     <>
-      <script 
-        type="application/ld+json" 
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} 
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       <section className='relative h-screen w-full flex items-center bg-[#0a0b10] overflow-hidden'>
 
@@ -279,9 +279,9 @@ function Home() {
         {/* Dynamic Concert Stage Laser Beams & Cinema Atmosphere */}
         <StageLaserBeams />
         <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[450px] bg-[radial-gradient(ellipse_at_center,rgba(194,167,90,0.15)_0%,transparent_70%)] blur-[120px] rounded-full z-0 pointer-events-none'></div>
-        
+
         <div className='container relative z-10 flex flex-col items-center text-center'>
-          
+
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -311,12 +311,12 @@ function Home() {
               <span>Uživo s podija</span>
             </div>
 
-            <video 
-              src={eventsVideo} 
-              autoPlay 
-              loop 
-              muted 
-              playsInline 
+            <video
+              src={eventsVideo}
+              autoPlay
+              loop
+              muted
+              playsInline
               className='w-full h-auto object-cover aspect-video'
             />
           </motion.div>
@@ -328,16 +328,16 @@ function Home() {
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
             className='mt-12 md:mt-16'
           >
-            <Link 
-              to='/galerija' 
-              onClick={() => window.scrollTo(0, 0)} 
+            <Link
+              to='/galerija'
+              onClick={() => window.scrollTo(0, 0)}
               className='px-8 h-12 md:h-14 inline-flex items-center justify-center bg-[color:var(--color-accent-gold)] text-black font-bold uppercase tracking-widest text-sm hover:bg-[#ffdf73] transition-colors shadow-[0_0_20px_rgba(212,175,55,0.3)] hover:shadow-[0_0_30px_rgba(212,175,55,0.6)] leading-none pt-1 gap-4 group'
             >
               Pogledajte galeriju
               <FontAwesomeIcon icon={faChevronRight} className='transition-transform duration-500 group-hover:translate-x-1.5' />
             </Link>
           </motion.div>
-          
+
         </div>
       </section>
 
@@ -421,7 +421,7 @@ function Home() {
           <VinylEdgePeeker side="right" />
           <EdgeSparkle size={18} className="mr-4 mt-2" />
         </div>
-        
+
         <div className='container relative z-10'>
           <div className='text-center mb-16 md:mb-20 flex flex-col items-center'>
             <h4 className='text-[color:var(--color-accent-gold)] font-medium tracking-[0.2em] uppercase text-xs md:text-sm mb-6 flex items-center justify-center gap-4'>
@@ -431,16 +431,16 @@ function Home() {
             </h4>
             <div className='flex items-center justify-center gap-4 mb-4'>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" className="w-10 h-10 md:w-12 md:h-12 shrink-0">
-                <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
-                <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
-                <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
-                <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+                <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z" />
+                <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" />
+                <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" />
+                <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" />
               </svg>
               <h3 className='text-4xl md:text-5xl font-bold tracking-wide text-white m-0'>
                 Što kažu klijenti?
               </h3>
             </div>
-            
+
             <div className='flex items-center justify-center gap-3 mb-2 mt-2'>
               <div className='flex gap-1 text-[#fbbc04] text-2xl'>
                 {[...Array(5)].map((_, idx) => (
@@ -449,7 +449,7 @@ function Home() {
               </div>
               <span className='text-white font-bold text-xl'>5.0</span>
             </div>
-            
+
             <p className='text-gray-400 font-light text-sm md:text-base mt-2'>
               Recenzije preuzete s Google Maps
             </p>
@@ -457,7 +457,7 @@ function Home() {
 
           <div className='grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto'>
             {displayedReviews.map((review, i) => (
-              <motion.div 
+              <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -474,13 +474,13 @@ function Home() {
                     <p className='text-gray-400 text-sm'>{getTimeAgo(review.date)}</p>
                   </div>
                 </div>
-                
+
                 <div className='flex gap-1 text-[#fbbc04] mb-8 text-sm'>
                   {[...Array(5)].map((_, idx) => (
                     <FontAwesomeIcon key={idx} icon={faStar} />
                   ))}
                 </div>
-                
+
                 <p className='text-gray-300 font-light leading-relaxed italic relative'>
                   <span className='text-4xl text-white/10 font-serif absolute -top-4 -left-2'>"</span>
                   <span className='relative z-10'>{review.text}</span>
