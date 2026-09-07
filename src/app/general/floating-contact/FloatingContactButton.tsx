@@ -29,7 +29,7 @@ function FloatingContactButton() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 15, scale: 0.9 }}
             transition={{ duration: 0.2 }}
-            className="flex flex-col gap-3 mb-4"
+            className="flex flex-col gap-3 mb-4 items-end"
           >
             {/* WhatsApp Button */}
             <a 
@@ -57,10 +57,37 @@ function FloatingContactButton() {
       </AnimatePresence>
 
       <div className="relative flex items-center justify-center">
-        {!isOpen && <div className="absolute inset-0 bg-gradient-to-tr from-[color:var(--color-accent-gold)] to-[#ffdf73] rounded-full animate-ping opacity-60"></div>}
+        {!isOpen && (
+          <>
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-tr from-[color:var(--color-accent-gold)] to-[#ffdf73] rounded-full pointer-events-none"
+              animate={{
+                scale: [1, 1.25, 1],
+                opacity: [0.55, 0.15, 0.55],
+              }}
+              transition={{
+                duration: 2.2,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-tr from-[color:var(--color-accent-gold)] to-[#ffdf73] rounded-full pointer-events-none blur-sm"
+              animate={{
+                scale: [1, 1.35, 1],
+                opacity: [0.4, 0.05, 0.4],
+              }}
+              transition={{
+                duration: 2.2,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+          </>
+        )}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="w-14 h-14 md:w-16 md:h-16 bg-gradient-to-tr from-[color:var(--color-accent-gold)] to-[#ffdf73] text-black rounded-full shadow-[0_0_20px_rgba(212,175,55,0.4)] flex items-center justify-center hover:scale-110 transition-transform duration-300 relative z-10"
+          className="w-14 h-14 md:w-16 md:h-16 bg-gradient-to-tr from-[color:var(--color-accent-gold)] to-[#ffdf73] text-black rounded-full shadow-[0_0_20px_rgba(212,175,55,0.4)] flex items-center justify-center hover:scale-105 transition-transform duration-300 relative z-10"
           aria-label="Kontakt opcije"
         >
           <FontAwesomeIcon 
